@@ -1,12 +1,14 @@
 """SQLAlchemy models for Carbon Print Calculator."""
-
 from datetime import datetime
 
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy() 
+
 bcrypt = Bcrypt()
-db = SQLAlchemy()
+
+ 
 
 class User(db.Model):
     """User in the system."""
@@ -18,14 +20,8 @@ class User(db.Model):
         primary_key=True,
     )
 
-    email = db.Column(
-        db.Text,
-        nullable=False,
-        unique=True,
-    )
-
     username = db.Column(
-        db.Text,
+        db.String(70),
         nullable=False,
         unique=True,
     )
@@ -35,13 +31,17 @@ class User(db.Model):
         nullable=False,
     )
 
-    calculations = db.relationship('User_Calculation')
+    email = db.Column(
+        db.String(120),
+        nullable=False,
+        unique=True,
+    )
 
     def __repr__(self):
         return f"<User #{self.id}: {self.username}, {self.email}>"
 
     @classmethod
-    def signup(cls, username, email, password):
+    def signup(cls, username, password, email):
         """Sign up user.
 
         Hashes password and adds user to system.
@@ -51,8 +51,8 @@ class User(db.Model):
 
         user = User(
             username=username,
-            email=email,
             password=hashed_pwd,
+            email=email,
         )
 
         db.session.add(user)
@@ -78,91 +78,97 @@ class User(db.Model):
 
         return False
 
-class User_Calculation(db.Model):
-    """This associates the user's calculations"""
 
-    __tablename__ = 'user_calculations'
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-    ) 
+def connect_db(app): 
+    db.app = app 
+    db.init_app(app)
 
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('users.id', ondelete='cascade')
-    )
 
-    vehicle_trip_id = db.Column(
-        db.Integer, 
-        db.ForeignKey('vehicle_trips.id')
-    )
 
-    def __repr__(self):
-        return f"<User_Calculation #{self.id}: {self.user_id}, {self.vehicle_trip_id}>"
+# class Calculate(db.Model): 
+#     """This stores every instance of a calculation made""" 
 
-class Vehicle(db.Model):
-    """This is the table of a vehicle's make and model"""
+#     __tablename__ = 'calculations' 
 
-    __tablename__ = 'vehicles'
+#     id = db.Column(
+#         db.Integer,
+#         primary_key=True,
+#     ) 
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-    ) 
+#     user_id = db.Column(
+#         db.Integer,
+#         db.ForeignKey('users.id', ondelete='cascade'),
+#         nullable=False,
+#     )
 
-    vehicle_make = db.Column(
-        db.Text, 
-        nullable=False,
-    )
+#     user = db.relationship('User')
 
-    vehicle_model + db.Column(
-        db.Text,
-        nullable=False,
-    )
+#     timestamp = db.Column(
+#         db.DateTime,
+#         nullable=False,
+#         default=datetime.utcnow(),
+#     )
 
-class Vehicle_Trip(db.Model):
-    """This stores the instance of personal vehicle travel calculation"""
+#     type = db.Column(
+#         db.Text,
+#         nullable=False
+#     )
 
-    __tablename__ = 'vehicle_trips'
+#     distance_value = db.Column(
+#         db.Float, 
+#         nullable=False,
+#         default=0
+#     )
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-    ) 
+#     electricity_value = db.Column(
+#         db.Float, 
+#         nullable=False,
+#         default=0
+#     )
 
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('users.id', ondelete='cascade')
-    )
+#     weight_value = db.Column(
+#         db.Float, 
+#         nullable=False,
+#         default=0
+#     )
 
-    vehicle_id = db.Column(
-        db.Integer,
-        db.ForeignKey('vehicles.id')
-    )
+#     country_name = db.Column(
+#         db.Text,
+#         default=None,
+#     )
+    
+#     # def serialize_vehicle_trip(self): 
+#     #     return {
+#     #         'type': "vehicle", 
+#     #         'distance_unit': "mi",
+#     #         'distance_value': self.distance_value, 
+#     #         'vehicle_model_id': self.vehicle_model_id,
+#     #     }
 
-    distance_unit = db.Column(
-        db.Text,
-        db.ForeignKey('distance_units.id')
-    )
+#     def __repr__(self):
+#         return f"<Calculation #{self.id}: {self.user_id}, {self.timestamp}, {self.type}>"
 
-    distance_value = db.Column(
-        db.Float, 
-        nullable=False,
-    )
 
-    carbon_lbs = db.Column(
-        db.Float
-        nullable=False,
-    )
+# class Vehicle(db.Model):
+#     """This is the table of a vehicle's make and model"""
 
-    carbon_kg = db.Column(
-        db.Float
-        nullable=False,
-    )
+#     __tablename__ = 'vehicles'
 
-    timestamp = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=datetime.utcnow(),
-    )
+#     id = db.Column(
+#         db.Text,
+#         primary_key=True,
+#     ) 
+
+#     vehicle_brand = db.Column(
+#         db.Text, 
+#         nullable=False,
+#     )
+
+#     vehicle_model + db.Column(
+#         db.Text,
+#         nullable=False,
+#     )
+
+#     def __repr__(self):
+#         return f"<Vehicle #{self.id}: {self.vehicle_brand}, {self.model}, {self.type}>"

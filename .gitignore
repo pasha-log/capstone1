@@ -1,4 +1,6 @@
+node_modules
 secrets.py 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

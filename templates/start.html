@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="intro">
+    <div class="intro-content">
+        <img src="https://sustainableleatherfoundation.com/wp-content/uploads/2021/04/carbon-footprint-icon-large.png" alt="logo">
+        <h1>Carbon<br>Print</h1>
+        <p>Calculate carbon emissions from your
+            <br> road trips, shipments, flights, and electricity
+        </p>
+        <form method="GET" action="/signup">
+            <label>Sign Up Today</label>
+            <button>Register</button>
+        </form>
+        <form method="GET" action="/login">
+            <button>Login</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

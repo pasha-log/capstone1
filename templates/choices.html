@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="Choices">
+    <h2>What do you want to calculate today?</h2>
+    <form method="GET" action="users/vehicle-trip">
+        <p>🚗</p>
+        <button>Vehicle</button>
+    </form>
+    <form method="GET" action="/shipping">
+        <p>🚚</p>
+        <button>Shipping</button>
+    </form>
+    <form method="GET" action="/flight">
+        <p>🛫</p>
+        <button>Flight</button>
+    </form>
+    <form method="GET" action="/electricity">
+        <p>🏠</p>
+        <button>Electricity</button>
+    </form>
+</section>
+{% endblock %}
