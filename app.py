@@ -5,18 +5,17 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError 
 
 from models import db, connect_db, User
-# , Calculate
+
 from forms import RegisterForm, LoginForm
-# , VehicleIDForm, VehicleTripForm
+
 
 CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
-# app.app_context()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     os.environ.get('DATABASE_URL', 'postgresql:///footprint_db'))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///footprint_db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///footprint_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", 'alsdajjdsad999999')
@@ -84,7 +83,7 @@ def signup():
 
         do_login(user)
 
-        return redirect(f"users/{user.id}/choices")
+        return redirect(f"/users/choices")
 
     else:
         return render_template('signup.html', form=form)
@@ -145,51 +144,6 @@ def present_choices():
 ##########################
 # Carbon Footprint Forms #
 ##########################
-
-# @app.route('users/vehicle', methods=['GET', 'POST'])
-# def record_vehicle_model():
-#     """Before vehicle trip calulation, record vehicle info""" 
-
-#     if not g.user:
-#         flash("Access unauthorized.", "danger")
-#         return redirect("/")
-
-#     form = VehicleIDForm()
-
-#     if form.validate_on_submit():
-#         calculation = Message(text=form.text.data)
-#         calculation = 
-#         g.user.messages.append(msg)
-#         db.session.commit()
-
-#         vehicle_brand = form.vehicle_brand.data
-#         vehicle_model = form.vehicle_model.data
-
-#         return redirect(f"/users/{g.user.id}")
-
-    
-#     return render_template('vehicle-form.html', form=form)
-
-# @app.route('users/vehicle-trip', methods=['GET', 'POST'])
-# def ask_for_parameters():
-#     """Present form for user vehicle carbon footprint calculation"""
-
-#     if not g.user:
-#         flash("Access unauthorized.", "danger")
-#         return redirect("/")
-#     form = VehicleTripForm()
-
-#     if form.validate_on_submit():
-#         distance_value = form.distance_value.data
-#         new_trip = Calculate(user_id=g.user.id, type=vehicle, distance_value=distance_value)
-
-#         new_cupcake = Cupcake(flavor=request.json["flavor"], size=request.json["size"], rating=request.json["rating"], image=request.json["image"])
-#         db.session.add(new_cupcake)
-#         db.session.commit()
-#         response_json = jsonify(trip_info=new_trip.serialize_vehicle_trip())
-#         return (response_json, 201)
-
-#     return render_template('vehicle-trip.html', form=form)
 
 @app.after_request
 def add_header(req):

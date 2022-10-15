@@ -56,7 +56,7 @@ class User(db.Model):
         )
 
         db.session.add(user)
-        return user
+        return userT
 
     @classmethod
     def authenticate(cls, username, password):
@@ -86,89 +86,84 @@ def connect_db(app):
 
 
 
-# class Calculate(db.Model): 
-#     """This stores every instance of a calculation made""" 
+class Calculate(db.Model): 
+    """This stores every instance of a calculation made""" 
 
-#     __tablename__ = 'calculations' 
+    __tablename__ = 'calculations' 
 
-#     id = db.Column(
-#         db.Integer,
-#         primary_key=True,
-#     ) 
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+    ) 
 
-#     user_id = db.Column(
-#         db.Integer,
-#         db.ForeignKey('users.id', ondelete='cascade'),
-#         nullable=False,
-#     )
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete='cascade'),
+        nullable=False,
+    )
 
-#     user = db.relationship('User')
+    user = db.relationship('User')
 
-#     timestamp = db.Column(
-#         db.DateTime,
-#         nullable=False,
-#         default=datetime.utcnow(),
-#     )
+    timestamp = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow(),
+    )
 
-#     type = db.Column(
-#         db.Text,
-#         nullable=False
-#     )
+    type = db.Column(
+        db.Text,
+        nullable=False
+    )
 
-#     distance_value = db.Column(
-#         db.Float, 
-#         nullable=False,
-#         default=0
-#     )
+    distance_value = db.Column(
+        db.Float, 
+        nullable=False,
+        default=0
+    )
 
-#     electricity_value = db.Column(
-#         db.Float, 
-#         nullable=False,
-#         default=0
-#     )
+    electricity_value = db.Column(
+        db.Float, 
+        nullable=False,
+        default=0
+    )
 
-#     weight_value = db.Column(
-#         db.Float, 
-#         nullable=False,
-#         default=0
-#     )
+    weight_value = db.Column(
+        db.Float, 
+        nullable=False,
+        default=0
+    )
 
-#     country_name = db.Column(
-#         db.Text,
-#         default=None,
-#     )
+    country_name = db.Column(
+        db.Text,
+        default=None,
+    )
     
-#     # def serialize_vehicle_trip(self): 
-#     #     return {
-#     #         'type': "vehicle", 
-#     #         'distance_unit': "mi",
-#     #         'distance_value': self.distance_value, 
-#     #         'vehicle_model_id': self.vehicle_model_id,
-#     #     }
-
-#     def __repr__(self):
-#         return f"<Calculation #{self.id}: {self.user_id}, {self.timestamp}, {self.type}>"
+    def __repr__(self):
+        return f"<Calculation #{self.id}: {self.user_id}, {self.timestamp}, {self.type}>"
 
 
-# class Vehicle(db.Model):
-#     """This is the table of a vehicle's make and model"""
+class Vehicle(db.Model):
+    """This is the table of a vehicle's make and model"""
 
-#     __tablename__ = 'vehicles'
+    __tablename__ = 'vehicles'
 
-#     id = db.Column(
-#         db.Text,
-#         primary_key=True,
-#     ) 
+    id = db.Column(
+        db.Text,
+        primary_key=True,
+    ) 
 
-#     vehicle_brand = db.Column(
-#         db.Text, 
-#         nullable=False,
-#     )
+    vehicle_brand = db.Column(
+        db.Text, 
+        nullable=False,
+    )
 
-#     vehicle_model + db.Column(
-#         db.Text,
-#         nullable=False,
-#     )
+    vehicle_model + db.Column(
+        db.Text,
+        nullable=False,
+    )
 
-#     def __repr__(self):
-#         return f"<Vehicle #{self.id}: {self.vehicle_brand}, {self.model}, {self.type}>"
+    def __repr__(self):
+        return f"<Vehicle #{self.id}: {self.vehicle_brand}, {self.model}, {self.type}>"
+
+if __name__ == '__main__':
+    app.run()
