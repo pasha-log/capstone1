@@ -4,9 +4,10 @@ from flask import Flask, render_template, request, flash, redirect, session, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError 
 
-from models import db, connect_db, User
+from models import db, connect_db, User, Vehicle, VehicleTripCalculation, ShippingCalculation, FlightCalculation, ElectricityCalculation
 
-from forms import RegisterForm, LoginForm
+from forms import RegisterForm, LoginForm, VehicleTripForm, ShippingForm, FlightForm, ElectricityForm
+from footprint import get_all_vehicle_brands, get_vehicle_estimate, get_shipping_estimate, get_flight_estimate, get_electricity_estimate
 
 
 CURR_USER_KEY = "curr_user"
@@ -83,7 +84,7 @@ def signup():
 
         do_login(user)
 
-        return redirect(f"/users/choices")
+        return redirect("/choices")
 
     else:
         return render_template('signup.html', form=form)
@@ -102,7 +103,7 @@ def login():
         if user:
             do_login(user)
             flash(f"Hello, {user.username}!", "success")
-            return redirect(f"users/{user.id}")
+            return redirect("/choices")
 
         flash("Invalid credentials.", 'danger')
 
@@ -116,7 +117,7 @@ def logout():
     do_logout()
 
     flash("You have successfully logged out.", 'success')
-    return redirect("/login")
+    return redirect("/")
 
 ############## 
 # Start page #   
@@ -132,7 +133,7 @@ def introduce():
 # Calculation choices #
 #######################
 
-@app.route('/users/choices', methods=['GET'])
+@app.route('/choices', methods=['GET'])
 def present_choices():
     """Present choices of calculation types to user""" 
     if not g.user:
@@ -141,9 +142,205 @@ def present_choices():
 
     return render_template("choices.html")
 
+###################
+# Add My Car Form #
+###################
+
+@app.route('/add_my_car', methods=['GET'])
+def choose_vehicle_model_id():
+    """User will choose car brand and model in order to get the vehicle_model_id,
+    then user gets redirected to main vehicle emissions form""" 
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    BRAND_LIST = get_all_vehicle_brands()
+
+    
+    return render_template('calculation_forms/vehicle-form2.html', BRAND_LIST=BRAND_LIST)
+
+@app.route('/add_my_car/<vehicle_model_id>', methods=['GET'])
+def collect_vehicle_model_id(vehicle_model_id):
+    """After choosing a vehicle, this route is fired to add the vehicle to our database""" 
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+
+    new_vehicle = Vehicle(vehicle_model_id=vehicle_model_id, user_id=g.user.id)
+    g.user.vehicles.append(new_vehicle)
+    db.session.add(new_vehicle)
+    db.session.commit()
+
+    return redirect(f'/car_trip_form/{vehicle_model_id}' )
+
 ##########################
 # Carbon Footprint Forms #
 ##########################
+
+@app.route('/car_trip_form/<vehicle_model_id>', methods=['GET', 'POST'])
+def present_vehicle_emissions_form(vehicle_model_id):
+    """Now that a user has chosen a specific vehicle, they can now enter data needed for an emissions estimate.
+    The vehicle chosen will be added to user's vehicles""" 
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    form = VehicleTripForm()
+
+    if form.validate_on_submit(): 
+        distance_unit = form.distance_unit.data
+        distance_value = form.distance_value.data
+        emission_unit = form.emission_unit.data
+
+        # Add new vehicle trip calculation instance into the database.
+        new_vehicle_trip = VehicleTripCalculation(user_id=g.user.id, 
+        distance_value=distance_value, 
+        distance_unit=distance_unit, 
+        vehicle_model_id=vehicle_model_id
+        )
+
+        g.user.vehicle_calculations.append(new_vehicle_trip)
+        db.session.add(new_vehicle_trip)
+        db.session.commit()
+        
+        carbon = get_vehicle_estimate(distance_value, distance_unit, vehicle_model_id, emission_unit)
+       
+        user = User.query.get_or_404(g.user.id)
+        return render_template('result.html', carbon=carbon, emission_unit=emission_unit, user=user)
+
+    return render_template('calculation_forms/vehicle-trip.html', form=form)
+
+@app.route('/shipping', methods=['GET', 'POST'])
+def present_shipping_form(): 
+    """User can put in data for calculating emissions from shipping"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/") 
+
+    form = ShippingForm() 
+
+    if form.validate_on_submit(): 
+        weight_unit = form.weight_unit.data
+        weight_value = form.weight_value.data
+        distance_unit = form.distance_unit.data
+        distance_value = form.distance_value.data
+        transport_method = form.transport_method.data
+        emission_unit = form.emission_unit.data
+
+        new_shipping_order = ShippingCalculation(
+            user_id=g.user.id, 
+            distance_value=distance_value, 
+            distance_unit=distance_unit, 
+            weight_value=weight_value,
+            weight_unit=weight_unit,
+            transport_method=transport_method,
+        )
+
+        g.user.shipping_calculations.append(new_shipping_order)
+        db.session.add(new_shipping_order)
+        db.session.commit()
+
+        carbon = get_shipping_estimate(weight_unit, weight_value, distance_unit, distance_value, transport_method, emission_unit)
+
+        user = User.query.get_or_404(g.user.id)
+        return render_template('result.html', carbon=carbon, emission_unit=emission_unit, user=user)
+
+    return render_template('calculation_forms/shipping.html', form=form)
+
+@app.route('/flight', methods=['GET', 'POST'])
+def present_flight_form(): 
+    """User can put in data for calculating emissions from a flight"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/") 
+
+    form = FlightForm() 
+
+    if form.validate_on_submit(): 
+        distance_unit = form.distance_unit.data
+        distance_value = form.distance_value.data
+        emission_unit = form.emission_unit.data
+
+        new_flight = FlightCalculation(
+            user_id=g.user.id, 
+            distance_value=distance_value, 
+            distance_unit=distance_unit, 
+        )
+
+        g.user.flight_calculations.append(new_flight)
+        db.session.add(new_flight)
+        db.session.commit()
+
+        carbon = get_flight_estimate(distance_unit, distance_value, emission_unit)
+
+        user = User.query.get_or_404(g.user.id)
+        return render_template('result.html', carbon=carbon, emission_unit=emission_unit, user=user)
+
+    return render_template('calculation_forms/flights.html', form=form)
+
+@app.route('/electricity', methods=['GET', 'POST'])
+def present_electricity_form(): 
+    """User can put in data for calculating emissions from electricity consumption"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/") 
+
+    form = ElectricityForm()
+
+    if form.validate_on_submit(): 
+        electricity_value=form.electricity_value.data
+        electricity_unit=form.electricity_unit.data
+        country = form.country.data 
+        emission_unit = form.emission_unit.data 
+
+        new_electricity = ElectricityCalculation(
+            user_id=g.user.id, 
+            electricity_value=electricity_value, 
+            electricity_unit=electricity_unit, 
+            country=country
+        )
+
+        g.user.electricity_calculations.append(new_electricity) 
+        db.session.add(new_electricity)
+        db.session.commit() 
+
+        carbon = get_electricity_estimate(electricity_value, electricity_unit, country, emission_unit) 
+
+        user = User.query.get_or_404(g.user.id)
+        return render_template('result.html', carbon=carbon, emission_unit=emission_unit, user=user)
+    
+    return render_template('calculation_forms/electricity.html', form=form)
+
+###########
+# Profile #
+###########
+
+@app.route('/user/<int:user_id>', methods=['GET'])
+def show_user_profile(user_id):
+    """User should see a list of all their recent calculations, 
+    as well as have access to a navbar to perform new calculations. 
+
+    In the future, we want this to have an interactive graph that displays user emissions data over time."""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/") 
+
+    user = User.query.get_or_404(user_id)
+    return render_template('profile.html', 
+    vehicle_calculations=user.vehicle_calculations, 
+    shipping_calculations=user.shipping_calculations, 
+    flight_calculations=user.flight_calculations, 
+    electricity_calculations=user.electricity_calculations,
+    user=user
+    )
 
 @app.after_request
 def add_header(req):

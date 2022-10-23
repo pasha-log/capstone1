@@ -37,6 +37,16 @@ class User(db.Model):
         unique=True,
     )
 
+    vehicles = db.relationship("Vehicle")
+
+    vehicle_calculations = db.relationship("VehicleTripCalculation")
+
+    shipping_calculations = db.relationship("ShippingCalculation")
+
+    flight_calculations = db.relationship("FlightCalculation")
+
+    electricity_calculations = db.relationship('ElectricityCalculation')
+
     def __repr__(self):
         return f"<User #{self.id}: {self.username}, {self.email}>"
 
@@ -56,7 +66,7 @@ class User(db.Model):
         )
 
         db.session.add(user)
-        return userT
+        return user
 
     @classmethod
     def authenticate(cls, username, password):
@@ -78,18 +88,34 @@ class User(db.Model):
 
         return False
 
+class Vehicle(db.Model):
+    """This is the table of a vehicle's make and model"""
 
+    __tablename__ = 'user_vehicles'
 
-def connect_db(app): 
-    db.app = app 
-    db.init_app(app)
+    # id = db.Column(
+    #     db.Text,
+    # ) 
 
+    vehicle_model_id = db.Column(
+        db.Text, 
+        primary_key=True,
+        nullable=False,
+    )
 
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete='CASCADE'),
+        nullable=False,
+    )
 
-class Calculate(db.Model): 
+    def __repr__(self):
+        return f"<Vehicle #{self.id}: {self.vehicle_model_id} {self.user_id}>"
+
+class VehicleTripCalculation(db.Model): 
     """This stores every instance of a calculation made""" 
 
-    __tablename__ = 'calculations' 
+    __tablename__ = 'vehicle_calculations' 
 
     id = db.Column(
         db.Integer,
@@ -102,7 +128,46 @@ class Calculate(db.Model):
         nullable=False,
     )
 
-    user = db.relationship('User')
+    timestamp = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow(),
+    )
+
+    distance_value = db.Column(
+        db.Float, 
+        nullable=False,
+    )
+
+    distance_unit = db.Column(
+        db.String(2),
+        nullable=False
+    )
+
+    vehicle_model_id = db.Column(
+        db.Text,
+        db.ForeignKey('user_vehicles.vehicle_model_id'),
+        nullable=False,
+    )
+    
+    def __repr__(self):
+        return f"<Calculation #{self.id}: {self.user_id}, {self.timestamp}, {self.distance_value}, {self.vehicle_model_id}>"
+
+class ShippingCalculation(db.Model): 
+    """This stores the instance of a shipping calculation"""
+
+    __tablename__ = 'shipping_orders' 
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+    ) 
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete='cascade'),
+        nullable=False
+    )
 
     timestamp = db.Column(
         db.DateTime,
@@ -110,60 +175,103 @@ class Calculate(db.Model):
         default=datetime.utcnow(),
     )
 
-    type = db.Column(
-        db.Text,
+    distance_value = db.Column(
+        db.Float, 
+        nullable=False,
+    )
+
+    distance_unit = db.Column(
+        db.String(2),
         nullable=False
+    ) 
+
+    weight_value = db.Column(
+        db.Float, 
+        nullable=False,
+    )
+
+    weight_unit = db.Column(
+        db.Text, 
+        nullable=False
+    )
+
+    transport_method = db.Column(
+        db.Text, 
+        nullable=False
+    ) 
+
+class FlightCalculation(db.Model): 
+    """This stores the instance of a flight calculation"""
+
+    __tablename__ = 'flights' 
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+    ) 
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete='cascade'),
+        nullable=False
+    )
+
+    timestamp = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow(),
     )
 
     distance_value = db.Column(
         db.Float, 
         nullable=False,
-        default=0
+    )
+
+    distance_unit = db.Column(
+        db.String(2),
+        nullable=False
+    ) 
+
+class ElectricityCalculation(db.Model): 
+    """This stores the instance of a housing electricity calculation"""
+
+    __tablename__ = 'electricity'
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+    ) 
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete='cascade'),
+        nullable=False
+    )
+
+    timestamp = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow(),
     )
 
     electricity_value = db.Column(
         db.Float, 
         nullable=False,
-        default=0
-    )
-
-    weight_value = db.Column(
-        db.Float, 
-        nullable=False,
-        default=0
-    )
-
-    country_name = db.Column(
-        db.Text,
-        default=None,
-    )
-    
-    def __repr__(self):
-        return f"<Calculation #{self.id}: {self.user_id}, {self.timestamp}, {self.type}>"
-
-
-class Vehicle(db.Model):
-    """This is the table of a vehicle's make and model"""
-
-    __tablename__ = 'vehicles'
-
-    id = db.Column(
-        db.Text,
-        primary_key=True,
     ) 
 
-    vehicle_brand = db.Column(
+    electricity_unit = db.Column(
+        db.String(3),
+        nullable=False
+    )
+
+    country = db.Column(
         db.Text, 
-        nullable=False,
+        nullable=False
     )
 
-    vehicle_model + db.Column(
-        db.Text,
-        nullable=False,
-    )
-
-    def __repr__(self):
-        return f"<Vehicle #{self.id}: {self.vehicle_brand}, {self.model}, {self.type}>"
+def connect_db(app): 
+    db.app = app 
+    db.init_app(app)
 
 if __name__ == '__main__':
     app.run()

@@ -6,6 +6,9 @@
   <div class="col-md-7 col-lg-5">
     <h2 class="join-message">Vehicle Trip</h2>
     <form method="POST" id="vehicle_trip_form">
+      <!-- <select class="form-control" id="user-vehicles">
+      </select>
+      <a href="/add_my_car">Choose a different car</a> -->
       {{ form.hidden_tag() }}
 
       {% for field in form if field.widget.input_type != 'hidden' %}
@@ -15,7 +18,7 @@
         {{ field(placeholder=field.label.text, class="form-control") }}
       {% endfor %}
 
-      <button class="btn btn-primary btn-lg btn-block">Emit</button>
+      <button class="btn btn-primary btn-lg btn-block">Emit Carbon Dioxide</button>
     </form>
   </div>
 </div>

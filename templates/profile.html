@@ -1,0 +1,96 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<nav class="profile-navbar">
+    <ul class="nav">
+        <li class="nav"><a href="/choices">
+            <img width="25px" height="14px" src="https://sustainableleatherfoundation.com/wp-content/uploads/2021/04/carbon-footprint-icon-large.png" alt="logo">
+            Carbon Print</a></li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropbtn">Calculate</a>
+          <div class="dropdown-content">
+            <a href="/add_my_car">Vehicle</a>
+            <a href="/shipping">Shipping</a>
+            <a href="/flight">Flight</a>
+            <a href="/electricity">Electricity</a>
+          </div>
+        </li>
+        <li class="nav" style="float:right"><a class="active" href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+    <div id="vehicle-calculations">
+        <ul>
+
+            {% for emission in vehicle_calculations %}
+            <li class="list-group-item">
+      
+                <div class="vehicle-calc-area">
+                  <a href="/users/{{ user.id }}">@{{ user.username }}</a>
+                  <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
+                  <p>{{ emission.distance_value }} {{ emission.distance_unit }}</p>
+                  <p>Type: Vehicle</p>
+                </div>
+                
+              </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <br>
+    <div id="shipping-calculations">
+        <ul>
+
+            {% for emission in shipping_calculations %}
+            <li class="list-group-item">
+      
+                <div class="shipping-calc-area">
+                  <a href="/users/{{ user.id }}">@{{ user.username }}</a>
+                  <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
+                  <p>{{ emission.distance_value }} {{ emission.distance_unit }}</p>
+                  <p>{{ emission.weight_value }} {{ emission.weight_unit }}</p>
+                  <p>Type: Shipping</p>
+                  <p>Transport method: {{ emission.transport_method }}</p>
+                </div>
+                
+              </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <br>
+    <div id="shipping-calculations">
+        <ul>
+
+            {% for emission in flight_calculations %}
+            <li class="list-group-item">
+      
+                <div class="flight-calc-area">
+                  <a href="/users/{{ user.id }}">@{{ user.username }}</a>
+                  <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
+                  <p>{{ emission.distance_value }} {{ emission.distance_unit }}</p>
+                  <p>Type: Flight</p>
+                </div>
+                
+              </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <br>
+    <div id="shipping-calculations">
+        <ul>
+
+            {% for emission in electricity_calculations %}
+            <li class="list-group-item">
+      
+                <div class="flight-calc-area">
+                  <a href="/users/{{ user.id }}">@{{ user.username }}</a>
+                  <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
+                  <p>{{ emission.electricity_value }} {{ emission.electricity_unit }}</p>
+                  <p>Type: Electricity</p>
+                  <p>Country: {{ emission.country }}</p>
+                </div>
+                
+              </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,3 @@
+=> options: car trip, shipping, flight, electricity 
+=> add my car: drop down brand/make, user selects brand, then a second drop down shows up for models, submit first, then collect model id
+=> car trip: distance value, and picked car
