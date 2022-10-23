@@ -9,7 +9,7 @@ $("#Menu1").on("change", async function (evt) {
         await fetch(`https://www.carboninterface.com/api/v1/vehicle_makes/${vehicle_brand_id}/vehicle_models`, {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer UXdjLlciEFrpTv9REIQ',
+                'Authorization': 'Bearer <authKey>',
                 'Content-Type': 'application/json'                   
             }
         }).then(async (res) => {

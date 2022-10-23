@@ -1,8 +1,8 @@
-# from secrets import SECRET_API_KEY
+from secrets import SECRET_API_KEY
 import requests
 
 response = requests.get(url='https://www.carboninterface.com/api/v1/vehicle_makes', headers={
-    'Authorization': 'Bearer UXdjLlciEFrpTv9REIQ',
+    'Authorization': f'Bearer {SECRET_API_KEY}',
     'Content-Type': 'application/json'
 })
 
@@ -26,7 +26,7 @@ units = {
 def get_vehicle_estimate(distance_value, distance_unit, vehicle_model_id, emission_unit):
     url = 'https://www.carboninterface.com/api/v1/estimates'
 
-    headers = {'Authorization': 'Bearer UXdjLlciEFrpTv9REIQ', 'Content-Type': 'application/json'}
+    headers = {'Authorization': f'Bearer {SECRET_API_KEY}', 'Content-Type': 'application/json'}
 
     data = {
         'type': 'vehicle',
@@ -46,7 +46,7 @@ def get_vehicle_estimate(distance_value, distance_unit, vehicle_model_id, emissi
 def get_shipping_estimate(weight_unit, weight_value, distance_unit, distance_value, transport_method, emission_unit):
     url = 'https://www.carboninterface.com/api/v1/estimates'
 
-    headers = {'Authorization': 'Bearer UXdjLlciEFrpTv9REIQ', 'Content-Type': 'application/json'} 
+    headers = {'Authorization': f'Bearer {SECRET_API_KEY}', 'Content-Type': 'application/json'} 
 
     data = {
         "type": "shipping",
@@ -92,7 +92,7 @@ def get_flight_estimate(distance_unit, distance_value, emission_unit):
 def get_electricity_estimate(electricity_value, electricity_unit, country, emission_unit): 
     url = 'https://www.carboninterface.com/api/v1/estimates'
 
-    headers = {'Authorization': 'Bearer UXdjLlciEFrpTv9REIQ', 'Content-Type': 'application/json'} 
+    headers = {'Authorization': f'Bearer {SECRET_API_KEY}', 'Content-Type': 'application/json'} 
 
     data = {
         "type": "electricity",
