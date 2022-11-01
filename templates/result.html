@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>{{ carbon }} {{ emission_unit }} of CO<sub>2</sub><br> gets released<br> into the atmosphere</h3>
+<body class="result">
+    <img class="result" src="/static/images/car-emissions.png">
+    <div class="result">
+<h1>{{ carbon }} {{ emission_unit }} of CO<sub>2</sub><br> gets released<br> into the atmosphere</h1>
 <form method="GET" action="/user/{{ user.id }}">
-    <button>Go to profile</button>
+    <button class="profile">Go to profile</button>
 </form>
+</div>
+<!-- <img src="static/images/car.png" class="result"> -->
+</body>
 {% endblock %}

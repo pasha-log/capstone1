@@ -1,28 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<body class="vehicle-form">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="static/app.js"></script>
 <div class="form-row">
     <div class="form-group col-md-4" id="brand">
-        <label for="inputEmail4">Brands</label>
+        <h1><b>Add a vehicle</b></h1>
+        <br>
+        <label class="Menu" for="Menu1">Brands</label>
         <select class="form-control" name="brands" id="Menu1">
             <option value="">--Please choose a brand--</option>
             {% for brand in BRAND_LIST %}
             <option id="{{ brand[0] }}" value="{{ brand[1] }}">{{ brand[1] }}</option>
             {% endfor %}
         </select>
-        <form method="GET" id="brand-name">
-            <button>Find models from a different brand</button>
-        </form>
     </div>
+    <div class="loading"></div> 
+    <br>
+    <br>
     <div class="form-group col-md-4" id="hiddenDiv">
-        <label for="input-model">Models</label>
+        <label class="Menu" for="Menu2">Models</label>
         <select class="form-control" name="models" id="Menu2">
             <option value="">--Please choose an option--</option>
         </select>
         <form method="GET" id="select-brand-model">
-            <button>Select this model</button>
+            <button class="model">Select</button>
+        </form>
+        <form method="GET" id="brand-name">
+            <button class="reset">Reset</button>
         </form>
     </div>
+</div>
+</body>
 {% endblock %}

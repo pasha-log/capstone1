@@ -1,22 +1,36 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
+</head>
+<body class="start-page">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="static/randomColors.js"></script>   
 <section class="intro">
     <div class="intro-content">
-        <img src="https://sustainableleatherfoundation.com/wp-content/uploads/2021/04/carbon-footprint-icon-large.png" alt="logo">
-        <h1>Carbon<br>Print</h1>
-        <p>Calculate carbon emissions from your
-            <br> road trips, shipments, flights, and electricity
+        <img src="https://sustainableleatherfoundation.com/wp-content/uploads/2021/04/carbon-footprint-icon-large.png" class="logo" alt="logo">
+        <h1 class="app-name">Carbon<br>Print</h1>
+        <p class="statement">Calculate carbon emissions<br> from your
+        road trips, shipments, <br>flights, and electricity.
         </p>
-        <form method="GET" action="/signup">
-            <label>Sign Up Today</label>
-            <button>Register</button>
+        <form method="GET" action="/signup" class="signup">
+            <h2 class="signup"><b>Create an account today.</b></h2>
+            <br>
+            <button class="signup">Register</button>
         </form>
-        <form method="GET" action="/login">
-            <button>Login</button>
-        </form>
+        <!-- <form method="GET" action="/login" class="login">
+            <button class="login">Login</button>
+        </form> -->
+        <b><a class="login" href="/login">Login</a></b>
+
     </div>
 </section>
+<div class="container">
+    {% for category, message in get_flashed_messages(with_categories=True) %}
+    <div id="start" class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
 
-{% endblock %}

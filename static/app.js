@@ -1,15 +1,25 @@
 $("#hiddenDiv").hide()
 
+function showSpinner() {
+    $(".loading").css("visibility", "visible");
+}
+
+function hideSpinner() {
+    $(".loading").css("visibility", "hidden");
+}
+
 $("#Menu1").on("change", async function (evt) {
     evt.preventDefault(); 
-    
+
+    showSpinner();
+
     let vehicle_brand_id = $(this).children(":selected").attr("id");
     console.log(vehicle_brand_id)
 
         await fetch(`https://www.carboninterface.com/api/v1/vehicle_makes/${vehicle_brand_id}/vehicle_models`, {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer <authKey>',
+                'Authorization': 'Bearer UXdjLlciEFrpTv9REIQ',
                 'Content-Type': 'application/json'                   
             }
         }).then(async (res) => {
@@ -35,8 +45,10 @@ $("#Menu1").on("change", async function (evt) {
                 }
             }   
             await appendHTMLModelOptions()
-        
-            $('#hiddenDiv').show() 
+            
+            $('#hiddenDiv').show()
+
+            hideSpinner();
     }).catch((e) => alert('Could not get models'));
 });
 

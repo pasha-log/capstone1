@@ -40,7 +40,7 @@ class VehicleTripForm(FlaskForm):
 
     distance_value = FloatField('Travel distance', validators=[DataRequired()]) 
     distance_unit = SelectField('Distance unit', choices=[('mi', 'mi'), ('km', 'km')], validators=[DataRequired()])
-    emission_unit = SelectField('Carbon dioxide weight unit', choices=[('lbs', 'lbs'), ('kg', 'kg'), ('g', 'g'), ('mt(metric tonnes)', 'mt(metric tonnes)')], validators=[DataRequired()])
+    # emission_unit = SelectField('Carbon dioxide weight unit', choices=[('lbs', 'lbs'), ('kg', 'kg'), ('g', 'g'), ('mt(metric tonnes)', 'mt(metric tonnes)')], validators=[DataRequired()])
 
 class ShippingForm(FlaskForm): 
     """This form is for calculating the carbon footprint of some order being shipped""" 
@@ -49,15 +49,15 @@ class ShippingForm(FlaskForm):
     weight_unit = SelectField('Weight unit of shipment', choices = [('lb', 'lb'), ('kg', 'kg'), ('g', 'g'), ('mt', 'mt')], validators=[DataRequired()])
     distance_value = FloatField('Travel distance', validators=[DataRequired()]) 
     distance_unit = SelectField('Distance unit', choices = [('mi', 'mi'), ('km', 'km')], validators=[DataRequired()])
-    transport_method = SelectField('The method the shipment is traveling', choices = [('ship', 'ship'), ('train', 'train'), ('truck', 'truck'), ('plane', 'plane')], validators=[DataRequired()])
-    emission_unit = SelectField('Carbon dioxide weight unit', choices=[('lbs', 'lbs'), ('kg', 'kg'), ('g', 'g'), ('mt(metric tonnes)', 'mt(metric tonnes)')], validators=[DataRequired()])
+    # transport_method = SelectField('The method the shipment is traveling', choices = [('ship', 'ship'), ('train', 'train'), ('truck', 'truck'), ('plane', 'plane')], validators=[DataRequired()])
+    # emission_unit = SelectField('Carbon dioxide weight unit', choices=[('lbs', 'lbs'), ('kg', 'kg'), ('g', 'g'), ('mt(metric tonnes)', 'mt(metric tonnes)')], validators=[DataRequired()])
 
 class FlightForm(FlaskForm): 
     """This form is for calculating a flight's carbon footprint"""
 
     distance_value = FloatField('Travel distance', validators=[DataRequired()]) 
     distance_unit = SelectField('Distance unit', choices = [('mi', 'mi'), ('km', 'km')], validators=[DataRequired()])
-    emission_unit = SelectField('Carbon dioxide weight unit', choices=[('lbs', 'lbs'), ('kg', 'kg'), ('g', 'g'), ('mt(metric tonnes)', 'mt(metric tonnes)')], validators=[DataRequired()])
+    # emission_unit = SelectField('Carbon dioxide weight unit', choices=[('lbs', 'lbs'), ('kg', 'kg'), ('g', 'g'), ('mt(metric tonnes)', 'mt(metric tonnes)')], validators=[DataRequired()])
 
 class ElectricityForm(FlaskForm): 
     """This form is for calculating a building's electrical carbon footprint""" 
@@ -96,5 +96,5 @@ class ElectricityForm(FlaskForm):
     electricity_value = FloatField('Electricity value', validators=[DataRequired()])
     electricity_unit = SelectField('Weight unit of shipment', choices = [('kwh', 'kwh'), ('mwh', 'mwh')], validators=[DataRequired()])
     country = SelectField('Country', choices=countries, validators=[DataRequired()])
-    emission_unit = SelectField('Carbon dioxide weight unit', choices=[('lbs', 'lbs'), ('kg', 'kg'), ('g', 'g'), ('mt(metric tonnes)', 'mt(metric tonnes)')], validators=[DataRequired()])
+    # emission_unit = SelectField('Carbon dioxide weight unit', choices=[('lbs', 'lbs'), ('kg', 'kg'), ('g', 'g'), ('mt(metric tonnes)', 'mt(metric tonnes)')], validators=[DataRequired()])
 

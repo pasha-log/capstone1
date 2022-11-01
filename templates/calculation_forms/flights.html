@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-  <div class="row justify-content-md-center">
-  <div class="col-md-7 col-lg-5">
-    <h2 class="join-message">Flight</h2>
-    <form method="POST" id="shipping_form">
+<body class="flight">
+  <div class="flight">
+    <h2 class="flight-title">Flight</h2>
+    <form method="POST" id="flight_form">
     
       {{ form.hidden_tag() }}
 
@@ -16,9 +15,21 @@
         {{ field(placeholder=field.label.text, class="form-control") }}
       {% endfor %}
 
-      <button class="btn btn-primary btn-lg btn-block">Emit Carbon Dioxide</button>
+      <br>
+      <label for="units"><b>Emission units</b></label>
+      <select name="emission_unit" id="units">
+        <option value="lbs">lbs</option>
+        <option value="kg">kg</option>
+        <option value="g">g</option>
+        <option value="mt(metric tonnes)">mt(metric tonnes)</option>
+      </select>
+
+      <button class="emit">Emit Carbon Dioxide</button>
     </form>
   </div>
-</div>
-
+<img src="/static/images/cloud.jpg" class="cloud5">
+<img src="/static/images/cloud.jpg" class="cloud6">
+<img src="/static/images/cloud.jpg" class="cloud7">
+<img src="/static/images/cloud.jpg" class="cloud8">
+</body>
 {% endblock %}

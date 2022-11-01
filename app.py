@@ -16,7 +16,6 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     os.environ.get('DATABASE_URL', 'postgresql:///footprint_db'))
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///footprint_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", 'alsdajjdsad999999')
@@ -194,7 +193,8 @@ def present_vehicle_emissions_form(vehicle_model_id):
     if form.validate_on_submit(): 
         distance_unit = form.distance_unit.data
         distance_value = form.distance_value.data
-        emission_unit = form.emission_unit.data
+        # emission_unit = form.emission_unit.data
+        emission_unit = request.form.get('emission_unit')
 
         # Add new vehicle trip calculation instance into the database.
         new_vehicle_trip = VehicleTripCalculation(user_id=g.user.id, 
@@ -229,8 +229,10 @@ def present_shipping_form():
         weight_value = form.weight_value.data
         distance_unit = form.distance_unit.data
         distance_value = form.distance_value.data
-        transport_method = form.transport_method.data
-        emission_unit = form.emission_unit.data
+        # transport_method = form.transport_method.data
+        transport_method = request.form.get('transport_method')
+        # emission_unit = form.emission_unit.data
+        emission_unit = request.form.get('emission_unit')
 
         new_shipping_order = ShippingCalculation(
             user_id=g.user.id, 
@@ -265,7 +267,8 @@ def present_flight_form():
     if form.validate_on_submit(): 
         distance_unit = form.distance_unit.data
         distance_value = form.distance_value.data
-        emission_unit = form.emission_unit.data
+        # emission_unit = form.emission_unit.data
+        emission_unit = request.form.get('emission_unit')
 
         new_flight = FlightCalculation(
             user_id=g.user.id, 
@@ -298,7 +301,8 @@ def present_electricity_form():
         electricity_value=form.electricity_value.data
         electricity_unit=form.electricity_unit.data
         country = form.country.data 
-        emission_unit = form.emission_unit.data 
+        # emission_unit = form.emission_unit.data 
+        emission_unit = request.form.get('emission_unit')
 
         new_electricity = ElectricityCalculation(
             user_id=g.user.id, 
@@ -341,6 +345,38 @@ def show_user_profile(user_id):
     electricity_calculations=user.electricity_calculations,
     user=user
     )
+
+# @app.route('/user/data', methods=["GET", "POST"])
+# def get_user_vehicle_calc_data():
+#     """This route should return the json data from user vehicle emissions."""
+
+#     if not g.user:
+#         flash("Access unauthorized.", "danger")
+#         return redirect("/") 
+
+#     data = g.user.vehicle_calculations 
+#     dates = []
+#     carbon = []
+
+#     if (len(data) >= 2):
+#         try: 
+#             for calc in data:
+#                 estimate = get_vehicle_estimate(calc.distance_value, calc.distance_unit, calc.vehicle_model_id, "kg")
+#                 carbon.append(estimate)
+#                 dates.append(calc.timestamp)
+#         except:
+#             flash("You have no data to display", "error")
+#     return jsonify({"Dates": dates, "Carbon": carbon})
+
+@app.route('/user/chart', methods=["GET"])
+def show_user_carbon_line_chart():
+    """User should see a line chart with every type of calculation made, tracking emissions over time."""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/") 
+
+    return render_template("chart.html")
 
 @app.after_request
 def add_header(req):
