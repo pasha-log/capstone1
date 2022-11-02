@@ -80,6 +80,22 @@ body.start-page {
 	font-family: 'Source Code Pro', monospace;
 }
 
+h1.greeting {
+	font-size: 5rem;
+	font-family: 'Source Code Pro', monospace;
+	position: absolute;
+	/* top: -70%;
+	left: 50%; */
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.letter {
+	transition: color 1000ms;
+}
+
 button.signup {
 	display: inline-block;
 	padding: 15px 25px;
@@ -94,6 +110,9 @@ button.signup {
 	border-radius: 15px;
 	box-shadow: 0 9px #999;
 	opacity: .7;
+	position: absolute;
+	top: 150%;
+	left: -5%;
 }
 
 button.signup:hover {
@@ -109,28 +128,22 @@ button.signup:active {
 form.signup {
 	margin: 0;
 	position: absolute;
-	top: 50%;
-	left: 50%;
+	top: 80%;
+	left: 0%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	/* -ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%); */
 }
 
 h2.signup {
-	/* /* position: absolute;
-	top: -230%;
-	left: 5%;
-	font-size: 30px; */
-	text-align: left;
-	display: inline-block;
-	margin: 0;
-
-	position: absolute;
-	top: -70%;
-	left: 50%;
-	/* top: 50%;
-	left: 50%; */
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	top: 75%;
+	left: -35%;
 }
 
 img.logo {
@@ -210,7 +223,7 @@ div.signup-container {
 	background-color: #8fe4ff;
 	padding: 20px;
 	width: 30%;
-	height: 60%;
+	height: 70%;
 	margin: 0 auto;
 	/* margin: 0; */
 	position: absolute;
@@ -248,12 +261,6 @@ button.signup-page:hover {
 	background-color: #375a80;
 }
 
-button.signup-page:active {
-	background-color: #375a80;
-	box-shadow: 0 5px #666;
-	transform: translateY(4px);
-}
-
 /* Login Page */
 
 body.login {
@@ -267,7 +274,7 @@ div.login {
 	background-color: #8fe4ff;
 	padding: 20px;
 	width: 30%;
-	height: 45%;
+	height: 50%;
 	margin: 0 auto;
 	/* margin: 0; */
 	position: absolute;
@@ -402,6 +409,15 @@ label.Menu {
 	font-size: 130%;
 }
 
+label.Menu2 {
+	position: absolute;
+	top: 60%;
+	left: 21%;
+	transform: translate(-50%, -50%);
+	font-weight: 1000;
+	font-size: 130%;
+}
+
 div.loading {
 	visibility: hidden;
 	display: flex;
@@ -446,13 +462,27 @@ div.form-row {
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.6);
 }
 
-select.form-control {
+select.form-control1 {
 	background-color: #ffe0b4;
 	font-family: 'Source Code Pro', monospace;
 	border-radius: 20px;
 	height: 30px;
 	font-weight: bold;
 	width: 60%;
+}
+
+select.form-control2 {
+	background-color: #ffe0b4;
+	font-family: 'Source Code Pro', monospace;
+	border-radius: 20px;
+	height: 30px;
+	font-weight: bold;
+	width: 55%;
+	position: absolute;
+	top: 60%;
+	left: 60%;
+	transform: translate(-50%, -50%);
+	/* margin: -25px 0 0 -25px; */
 }
 
 button.model {
@@ -614,7 +644,7 @@ img.cloud5 {
 	width: 20%;
 	height: 20%;
 	position: absolute;
-	top: 70%;
+	top: 75%;
 	left: 20%;
 	opacity: 80%;
 }
@@ -650,6 +680,18 @@ body.shipping {
 	font-family: 'Source Code Pro', monospace;
 }
 
+label.methods {
+	font-weight: 1000;
+	font-size: 140%;
+	/* color: white; */
+}
+
+label.units {
+	font-weight: 1000;
+	font-size: 140%;
+	/* color: white; */
+}
+
 div.shipping {
 	background-image: url(https://st3.depositphotos.com/9703412/18207/v/600/depositphotos_182076736-stock-illustration-container-ship-freight-port-terminal.jpg);
 	color: black;
@@ -671,7 +713,7 @@ div.shipping {
 	transform: translate(-50%, -50%);
 	margin-bottom: 1.5rem;
 	padding: 1.5rem;
-	font-size: 130%;
+	font-size: 120%;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.6);
 }
 
@@ -723,9 +765,9 @@ div.flight {
 	text-align: center;
 	/* padding: 20px; */
 	width: 45%;
-	height: 65%;
+	height: 70%;
 	margin: 0 auto;
-	/* margin: 0; */
+	/* margin: 10px; */
 	position: absolute;
 	top: 60%;
 	left: 50%;
@@ -733,7 +775,7 @@ div.flight {
 	transform: translate(-50%, -50%);
 	margin-bottom: 1.5rem;
 	padding: 1.5rem;
-	font-size: 130%;
+	font-size: 120%;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.6);
 }
 
@@ -879,13 +921,54 @@ body.profile {
 	font-family: 'Source Code Pro', monospace;
 }
 
+div.row {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	gap: 5px;
+}
+
+/* div.row:first-child {
+	align-self: center;
+} */
+
+* {
+	box-sizing: border-box;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+	float: left;
+	width: 25%;
+	padding: 10px;
+	height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+	.column {
+		width: 100%;
+	}
+}
+
+div.row {
+	height: auto;
+}
 
 #vehicle-calculations {
-	position: relative;
+	/* position: relative; */
 	background-color: #ffb041;
 	border-radius: 20px;
-	width: 30%;
+	width: 275px;
+	margin: 5px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
+	height: inherit;
 }
 
 #vehicle-calculations .list-group-item {
@@ -899,11 +982,13 @@ body.profile {
 }
 
 #shipping-calculations {
-	position: relative;
+	/* position: absolute; */
 	background-color: #ff5e5e;
 	border-radius: 20px;
-	width: 30%;
+	width: 275px;
+	margin: 5px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
+	height: inherit;
 }
 
 #shipping-calculations .list-group-item {
@@ -917,11 +1002,13 @@ body.profile {
 }
 
 #flight-calculations {
-	position: relative;
+	/* position: relative; */
 	background-color: #3062f8;
 	border-radius: 20px;
-	width: 30%;
+	width: 275px;
+	margin: 5px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
+	height: inherit;
 }
 
 #flight-calculations .list-group-item {
@@ -935,11 +1022,13 @@ body.profile {
 }
 
 #electricity-calculations {
-	position: relative;
+	/* position: relative; */
 	background-color: #2cb337;
 	border-radius: 20px;
-	width: 30%;
+	width: 275px;
+	margin: 5px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
+	height: inherit;
 }
 
 #electricity-calculations .list-group-item {
@@ -961,10 +1050,10 @@ body.profile {
 div.chart {
 	background-color: white;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.6);
-	border-radius: 20px; 
-	position: relative;
-	top: 70%;
-	
+	border-radius: 20px;
+	position: absolute;
+	top: 30%;
+	left: 25%;
 }
 
 body.chart {

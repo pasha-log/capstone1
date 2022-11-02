@@ -149,6 +149,16 @@ class VehicleTripCalculation(db.Model):
         db.ForeignKey('user_vehicles.vehicle_model_id'),
         nullable=False,
     )
+
+    carbon = db.Column(
+        db.Float,
+        nullable=False,
+    )
+
+    emission_unit = db.Column(
+        db.Text,
+        nullable=False,
+    )
     
     def __repr__(self):
         return f"<Calculation #{self.id}: {self.user_id}, {self.timestamp}, {self.distance_value}, {self.vehicle_model_id}>"

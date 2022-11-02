@@ -1,8 +1,10 @@
-# from secrets import SECRET_API_KEY
+import os
 import requests
 
+SECRET_API_KEY = os.environ.get('CARBON_SECRET_KEY')
+
 response = requests.get(url='https://www.carboninterface.com/api/v1/vehicle_makes', headers={
-    'Authorization': f'Bearer UXdjLlciEFrpTv9REIQ',
+    'Authorization': f'Bearer {SECRET_API_KEY}',
     'Content-Type': 'application/json'
 })
 
@@ -26,7 +28,26 @@ units = {
 def get_vehicle_estimate(distance_value, distance_unit, vehicle_model_id, emission_unit):
     url = 'https://www.carboninterface.com/api/v1/estimates'
 
-    headers = {'Authorization': 'Bearer UXdjLlciEFrpTv9REIQ', 'Content-Type': 'application/json'}
+    headers = {'Authorization': f'Bearer {SECRET_API_KEY}', 'Content-Type': 'application/json'}
+
+    data = {
+        'type': 'vehicle',
+        "distance_unit": f"{distance_unit}",
+        "distance_value": f'{distance_value}',
+        "vehicle_model_id": f'{vehicle_model_id}'
+    }
+
+    res = requests.post(url, headers=headers, json=data)
+    data = res.json()
+
+    for key in units.keys(): 
+        if key == emission_unit:
+            carbon_unit = units[key] 
+            return data['data']['attributes'][f'{carbon_unit}']
+def get_vehicle_estimate(distance_value, distance_unit, vehicle_model_id, emission_unit):
+    url = 'https://www.carboninterface.com/api/v1/estimates'
+
+    headers = {'Authorization': f'Bearer {SECRET_API_KEY}', 'Content-Type': 'application/json'}
 
     data = {
         'type': 'vehicle',
@@ -46,7 +67,7 @@ def get_vehicle_estimate(distance_value, distance_unit, vehicle_model_id, emissi
 def get_shipping_estimate(weight_unit, weight_value, distance_unit, distance_value, transport_method, emission_unit):
     url = 'https://www.carboninterface.com/api/v1/estimates'
 
-    headers = {'Authorization': 'Bearer UXdjLlciEFrpTv9REIQ', 'Content-Type': 'application/json'} 
+    headers = {'Authorization': 'Bearer {SECRET_API_KEY}', 'Content-Type': 'application/json'} 
 
     data = {
         "type": "shipping",
@@ -92,7 +113,7 @@ def get_flight_estimate(distance_unit, distance_value, emission_unit):
 def get_electricity_estimate(electricity_value, electricity_unit, country, emission_unit): 
     url = 'https://www.carboninterface.com/api/v1/estimates'
 
-    headers = {'Authorization': 'Bearer UXdjLlciEFrpTv9REIQ', 'Content-Type': 'application/json'} 
+    headers = {'Authorization': f'Bearer {SECRET_API_KEY}', 'Content-Type': 'application/json'} 
 
     data = {
         "type": "electricity",

@@ -2,10 +2,11 @@
 
 {% block content %}
 <body class="profile">
-  <div class="wrapper">
-    <div>
-        <ul id="vehicle-calculations">
+  <div class="row">
+    <div class="column"  id="vehicle-calculations">
+        <ul>
           <h3>Vehicle emissions</h3>
+            {% if vehicle_calculations|length > 0 %}
             {% for emission in vehicle_calculations %}
             <li class="list-group-item">
       
@@ -18,12 +19,16 @@
                 
               </li>
             {% endfor %}
+            {% else %}
+            <p>You have no vehicle emissions yet</p>
+            {% endif %}
         </ul>
     </div>
     <br>
-    <div>
-        <ul id="shipping-calculations">
+    <div class="column" id="shipping-calculations">
+        <ul>
           <h3>Shipping emissions</h3>
+            {% if shipping_calculations|length > 0 %}
             {% for emission in shipping_calculations %}
             <li class="list-group-item">
       
@@ -38,12 +43,16 @@
                 
               </li>
             {% endfor %}
+            {% else %}
+            <p>You have no shipping emissions yet</p>
+            {% endif %}
         </ul>
     </div>
     <br>
-    <div>
-        <ul id="flight-calculations">
+    <div class="column" id="flight-calculations">
+        <ul>
           <h3>Flight emissions</h3>
+            {% if flight_calculations|length > 0 %}
             {% for emission in flight_calculations %}
             <li class="list-group-item">
       
@@ -56,12 +65,16 @@
                 
               </li>
             {% endfor %}
+            {% else %}
+            <p>You have no flight emissions yet</p>
+            {% endif %}
         </ul>
     </div>
     <br>
-    <div>
-        <ul id="electricity-calculations">
+    <div class="column" id="electricity-calculations">
+        <ul>
           <h3>Electricity emissions</h3>
+            {% if electricity_calculations|length > 0 %}
             {% for emission in electricity_calculations %}
             <li class="list-group-item">
       
@@ -75,6 +88,9 @@
                 
               </li>
             {% endfor %}
+            {% else %}
+            <p>You have no vehicle emissions yet</p>
+            {% endif %}
         </ul>
     </div>
   </div>

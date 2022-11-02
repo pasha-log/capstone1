@@ -2,14 +2,12 @@
 
 {% block content %}
 <body class="vehicle-form">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="static/app.js"></script>
 <div class="form-row">
     <div class="form-group col-md-4" id="brand">
         <h1><b>Add a vehicle</b></h1>
         <br>
         <label class="Menu" for="Menu1">Brands</label>
-        <select class="form-control" name="brands" id="Menu1">
+        <select class="form-control1" name="brands" id="Menu1">
             <option value="">--Please choose a brand--</option>
             {% for brand in BRAND_LIST %}
             <option id="{{ brand[0] }}" value="{{ brand[1] }}">{{ brand[1] }}</option>
@@ -20,9 +18,9 @@
     <br>
     <br>
     <div class="form-group col-md-4" id="hiddenDiv">
-        <label class="Menu" for="Menu2">Models</label>
-        <select class="form-control" name="models" id="Menu2">
-            <option value="">--Please choose an option--</option>
+        <label class="Menu2" for="Menu2">Models</label>
+        <select class="form-control2" name="models" id="Menu2">
+            <option value="">--Please choose a model--</option>
         </select>
         <form method="GET" id="select-brand-model">
             <button class="model">Select</button>
@@ -33,4 +31,6 @@
     </div>
 </div>
 </body>
+<script src="https://unpkg.com/jquery"></script>
+<script src="/static/app.js"></script>
 {% endblock %}

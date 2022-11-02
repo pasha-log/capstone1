@@ -26,7 +26,9 @@ with app.app_context():
     user_id=2, 
     distance_value=100, 
     distance_unit='mi', 
-    vehicle_model_id="7268a9b7-17e8-4c8d-acca-57059252afe9"
+    vehicle_model_id="7268a9b7-17e8-4c8d-acca-57059252afe9",
+    carbon=81.64,
+    emission_unit='lbs'
     )
 
     u2_shipping_estimate = ShippingCalculation(

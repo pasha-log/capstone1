@@ -196,19 +196,21 @@ def present_vehicle_emissions_form(vehicle_model_id):
         # emission_unit = form.emission_unit.data
         emission_unit = request.form.get('emission_unit')
 
+        carbon = get_vehicle_estimate(distance_value, distance_unit, vehicle_model_id, emission_unit)
+
         # Add new vehicle trip calculation instance into the database.
         new_vehicle_trip = VehicleTripCalculation(user_id=g.user.id, 
         distance_value=distance_value, 
         distance_unit=distance_unit, 
-        vehicle_model_id=vehicle_model_id
+        vehicle_model_id=vehicle_model_id,
+        carbon=carbon, 
+        emission_unit=emission_unit
         )
 
         g.user.vehicle_calculations.append(new_vehicle_trip)
         db.session.add(new_vehicle_trip)
         db.session.commit()
         
-        carbon = get_vehicle_estimate(distance_value, distance_unit, vehicle_model_id, emission_unit)
-       
         user = User.query.get_or_404(g.user.id)
         return render_template('result.html', carbon=carbon, emission_unit=emission_unit, user=user)
 
@@ -346,27 +348,33 @@ def show_user_profile(user_id):
     user=user
     )
 
-# @app.route('/user/data', methods=["GET", "POST"])
-# def get_user_vehicle_calc_data():
-#     """This route should return the json data from user vehicle emissions."""
+@app.route('/user/data', methods=["GET", "POST"])
+def get_user_vehicle_calc_data():
+    """This route should return the json data from user vehicle emissions."""
 
-#     if not g.user:
-#         flash("Access unauthorized.", "danger")
-#         return redirect("/") 
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/") 
 
-#     data = g.user.vehicle_calculations 
-#     dates = []
-#     carbon = []
+    data = g.user.vehicle_calculations 
+    dates = []
+    carbon = [] 
+    
+    for calc in data:
+        if calc.emission_unit == 'lbs':
+            carbon_kg = calc.carbon / .45
+            carbon.append(carbon_kg)
+        elif calc.emission_unit == 'g':
+            carbon_kg = calc.carbon / 1000
+            carbon.append(carbon_kg)
+        elif calc.emission_unit == 'mt(metric tonnes)':
+            carbon_kg = calc.carbon * 1000
+            carbon.append(carbon_kg)
+        else: 
+            carbon.append(calc.carbon)
+        dates.append(calc.timestamp)
 
-#     if (len(data) >= 2):
-#         try: 
-#             for calc in data:
-#                 estimate = get_vehicle_estimate(calc.distance_value, calc.distance_unit, calc.vehicle_model_id, "kg")
-#                 carbon.append(estimate)
-#                 dates.append(calc.timestamp)
-#         except:
-#             flash("You have no data to display", "error")
-#     return jsonify({"Dates": dates, "Carbon": carbon})
+    return jsonify({"Carbon": carbon, "Dates": dates})
 
 @app.route('/user/chart', methods=["GET"])
 def show_user_carbon_line_chart():
