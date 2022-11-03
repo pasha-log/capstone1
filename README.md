@@ -1,6 +1,6 @@
 # The Carbon Print Calculator
 
-<video src="/static/images/carbon_demo.mp4" controls="controls" style="max-width: 730px;"></video>
+![](/static/images/carbon_demo.mp4)
 
 ## Description: 
 This will be my first capstone project using an API called Carbon Interface: 
