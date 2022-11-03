@@ -26,13 +26,7 @@ $("#Menu1").on("change", async function (evt) {
     let vehicle_brand_id = $(this).children(":selected").attr("id");
     console.log(vehicle_brand_id)
 
-        await fetch(`https://www.carboninterface.com/api/v1/vehicle_makes/${vehicle_brand_id}/vehicle_models`, {
-            method: 'GET',
-            headers: {
-                'Authorization': "Bearer <API_KEY>",
-                'Content-Type': 'application/json'                   
-            }
-        }).then(async (res) => {
+        await fetch(`http://127.0.0.1:5000/get_models/${vehicle_brand_id}`, { method: 'GET' }).then(async (res) => {
             let modelArray = []
             let result = await res.json() 
             function getModelData(){

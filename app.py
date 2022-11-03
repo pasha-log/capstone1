@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, render_template, request, flash, redirect, session, g, abort, jsonify
+import requests
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError 
 
@@ -11,6 +12,8 @@ from footprint import get_all_vehicle_brands, get_vehicle_estimate, get_shipping
 
 
 CURR_USER_KEY = "curr_user"
+
+SECRET_API_KEY = os.environ.get('CARBON_SECRET_KEY')
 
 app = Flask(__name__)
 
@@ -158,6 +161,23 @@ def choose_vehicle_model_id():
 
     
     return render_template('calculation_forms/vehicle-form2.html', BRAND_LIST=BRAND_LIST)
+
+@app.route('/get_models/<vehicle_brand_id>', methods=['GET'])
+def make_request_for_brand_models(vehicle_brand_id):
+    """This route is for providing the app.js file with models without exposing the SECRET_API_KEY"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/") 
+    
+    response = requests.get(url=f'https://www.carboninterface.com/api/v1/vehicle_makes/{vehicle_brand_id}/vehicle_models', headers={
+        'Authorization': f'Bearer {SECRET_API_KEY}',
+        'Content-Type': 'application/json'
+    })
+
+    data = response.json()
+
+    return(data)
 
 @app.route('/add_my_car/<vehicle_model_id>', methods=['GET'])
 def collect_vehicle_model_id(vehicle_model_id):
