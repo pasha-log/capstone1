@@ -1,5 +1,5 @@
 from app import app
-from models import db, User, Vehicle, VehicleTripCalculation, ShippingCalculation, FlightCalculation, ElectricityCalculation
+from models import db, User, VehicleTripCalculation, ShippingCalculation, FlightCalculation, ElectricityCalculation
 
 
 with app.app_context(): 
@@ -15,11 +15,6 @@ with app.app_context():
     username="Pasha",
     password="doublesecret",
     email="lsafs@saf.com"
-    )
-
-    u2_vehicle = Vehicle(
-    vehicle_model_id="7268a9b7-17e8-4c8d-acca-57059252afe9",  
-    user_id=2
     )
 
     u2_vehicle_estimate = VehicleTripCalculation(
@@ -53,6 +48,6 @@ with app.app_context():
     country='US'
     )
 
-    db.session.add_all([u1, u2, u2_vehicle])
-    db.session.add_all([u2_vehicle_estimate, u2_shipping_estimate, u2_flight_estimate])
+    db.session.add_all([u1, u2])
+    db.session.add_all([u2_vehicle_estimate, u2_shipping_estimate, u2_flight_estimate, u2_electricity_estimate])
     db.session.commit()

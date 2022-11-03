@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, flash, redirect, session, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError 
 
-from models import db, connect_db, User, Vehicle, VehicleTripCalculation, ShippingCalculation, FlightCalculation, ElectricityCalculation
+from models import db, connect_db, User, VehicleTripCalculation, ShippingCalculation, FlightCalculation, ElectricityCalculation
 
 from forms import RegisterForm, LoginForm, VehicleTripForm, ShippingForm, FlightForm, ElectricityForm
 from footprint import get_all_vehicle_brands, get_vehicle_estimate, get_shipping_estimate, get_flight_estimate, get_electricity_estimate
@@ -166,12 +166,6 @@ def collect_vehicle_model_id(vehicle_model_id):
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
-
-
-    new_vehicle = Vehicle(vehicle_model_id=vehicle_model_id, user_id=g.user.id)
-    g.user.vehicles.append(new_vehicle)
-    db.session.add(new_vehicle)
-    db.session.commit()
 
     return redirect(f'/car_trip_form/{vehicle_model_id}' )
 

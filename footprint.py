@@ -3,14 +3,12 @@ import requests
 
 SECRET_API_KEY = os.environ.get('CARBON_SECRET_KEY')
 
-response = requests.get(url='https://www.carboninterface.com/api/v1/vehicle_makes', headers={
-    'Authorization': f'Bearer {SECRET_API_KEY}',
-    'Content-Type': 'application/json'
-})
-
-data = response.json()
-
 def get_all_vehicle_brands():
+    response = requests.get(url='https://www.carboninterface.com/api/v1/vehicle_makes', headers={
+        'Authorization': f'Bearer {SECRET_API_KEY}',
+        'Content-Type': 'application/json'
+    })
+    data = response.json()
     VEHICLE_BRAND_NAMES = [] 
     for brand in data: 
         id = brand['data']['id']

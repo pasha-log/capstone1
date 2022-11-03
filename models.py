@@ -37,8 +37,6 @@ class User(db.Model):
         unique=True,
     )
 
-    vehicles = db.relationship("Vehicle")
-
     vehicle_calculations = db.relationship("VehicleTripCalculation")
 
     shipping_calculations = db.relationship("ShippingCalculation")
@@ -88,30 +86,6 @@ class User(db.Model):
 
         return False
 
-class Vehicle(db.Model):
-    """This is the table of a vehicle's make and model"""
-
-    __tablename__ = 'user_vehicles'
-
-    # id = db.Column(
-    #     db.Text,
-    # ) 
-
-    vehicle_model_id = db.Column(
-        db.Text, 
-        primary_key=True,
-        nullable=False,
-    )
-
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('users.id', ondelete='CASCADE'),
-        nullable=False,
-    )
-
-    def __repr__(self):
-        return f"<Vehicle #{self.id}: {self.vehicle_model_id} {self.user_id}>"
-
 class VehicleTripCalculation(db.Model): 
     """This stores every instance of a calculation made""" 
 
@@ -146,7 +120,6 @@ class VehicleTripCalculation(db.Model):
 
     vehicle_model_id = db.Column(
         db.Text,
-        db.ForeignKey('user_vehicles.vehicle_model_id'),
         nullable=False,
     )
 
