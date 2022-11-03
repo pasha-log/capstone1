@@ -1,6 +1,6 @@
 # The Carbon Print Calculator
 
-<!-- <img src='./sampleConnectFour.gif' alt='Connect Four Gif' height='350' width='500'> -->
+<img src='https://gfycat.com/creepyunimportantblacklemur' alt='' height='350' width='500'>
 
 ## Description: 
 This will be my first capstone project using an API called Carbon Interface: 
