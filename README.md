@@ -6,7 +6,7 @@ https://user-images.githubusercontent.com/65935072/199641266-6dbb531f-bdc9-4c45-
 
 
 
-## Description: 
+## API Integration: 
 This will be my first capstone project using a RESTful API called Carbon Interface: 
 - 👣[Carbon Interface](https://docs.carboninterface.com/)
 
