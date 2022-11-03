@@ -8,6 +8,14 @@ function hideSpinner() {
     $(".loading").css("visibility", "hidden");
 }
 
+function uniqByKeepFirst(a, key) {
+    let seen = new Set();
+    return a.filter(item => {
+        let k = key(item);
+        return seen.has(k) ? false : seen.add(k);
+    });
+}
+
 $("#Menu1").on("change", async function (evt) {
     evt.preventDefault(); 
 
@@ -19,28 +27,30 @@ $("#Menu1").on("change", async function (evt) {
         await fetch(`https://www.carboninterface.com/api/v1/vehicle_makes/${vehicle_brand_id}/vehicle_models`, {
             method: 'GET',
             headers: {
-                'Authorization': "Bearer <API_KEY>",
+                'Authorization': "Bearer R7RFawGVsYMUGYaVG09eIA",
                 'Content-Type': 'application/json'                   
             }
         }).then(async (res) => {
-            let modelList = []
+            let modelArray = []
             let result = await res.json() 
             function getModelData(){
                 for (let model in result){
                     const id = result[model].data.id
-                    const year = result[model].data.attributes.year
-                    const name = result[model].data.attributes.name
-                    modelList.push([id, year, name])
+                    let year = result[model].data.attributes.year
+                    let name = result[model].data.attributes.name
+                    const yearName = `${year} ${name}`;
+                    modelArray.push({a: id, b: yearName})
+                    modelArray = uniqByKeepFirst(modelArray, it => it.b)
                 }
-            return modelList;
+            return modelArray;
             }
             await getModelData();
-            console.log(modelList)
+            console.log(modelArray)
             async function appendHTMLModelOptions(){
-                for (let vehMod in modelList) {
+                for (let vehMod in modelArray) {
                     let $modelDropdown = $('#Menu2')
-                    let $option = $('<option></option>').text(`${modelList[vehMod][1]} ${modelList[vehMod][2]}`)
-                    $($option).attr('id', `${modelList[vehMod][0]}`)
+                    let $option = $('<option></option>').text(`${modelArray[vehMod].b}`)
+                    $($option).attr('id', `${modelArray[vehMod].a}`)
                     $modelDropdown.append($option)
                 }
             }   
