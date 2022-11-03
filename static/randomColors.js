@@ -5,12 +5,6 @@ function randomRGB(){
     return `rgb(${r}, ${g}, ${b})`
 }
 
-/*const h1 = document.querySelector('h1');
-
-setInterval(function(){
-    h1.style.color = randomRGB()
-}, 500)*/
-
 const letters = document.querySelectorAll('.letter')
 
 setInterval(function(){

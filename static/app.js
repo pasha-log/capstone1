@@ -8,13 +8,15 @@ function hideSpinner() {
     $(".loading").css("visibility", "hidden");
 }
 
-function uniqByKeepFirst(a, key) {
+// https://stackoverflow.com/questions/9229645/remove-duplicate-values-from-js-array
+function uniqueByKeepingFirst(array, key) {
     let seen = new Set();
-    return a.filter(item => {
+    return array.filter(item => {
         let k = key(item);
         return seen.has(k) ? false : seen.add(k);
     });
 }
+// https://stackoverflow.com/questions/9229645/remove-duplicate-values-from-js-array
 
 $("#Menu1").on("change", async function (evt) {
     evt.preventDefault(); 
@@ -40,7 +42,7 @@ $("#Menu1").on("change", async function (evt) {
                     let name = result[model].data.attributes.name
                     const yearName = `${year} ${name}`;
                     modelArray.push({a: id, b: yearName})
-                    modelArray = uniqByKeepFirst(modelArray, it => it.b)
+                    modelArray = uniqueByKeepingFirst(modelArray, it => it.b)
                 }
             return modelArray;
             }
