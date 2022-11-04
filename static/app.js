@@ -37,8 +37,9 @@ $("#Menu1").on("change", async function (evt) {
                     const yearName = `${year} ${name}`;
                     modelArray.push({a: id, b: yearName})
                     modelArray = uniqueByKeepingFirst(modelArray, it => it.b)
-                    console.log(modelArray.sort((one, two) => one.b.localeCompare(two.b)))
+                    // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
                     modelArray.sort((one, two) => one.b.localeCompare(two.b));
+                    // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
                 }
             return modelArray;
             }
