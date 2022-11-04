@@ -37,6 +37,8 @@ $("#Menu1").on("change", async function (evt) {
                     const yearName = `${year} ${name}`;
                     modelArray.push({a: id, b: yearName})
                     modelArray = uniqueByKeepingFirst(modelArray, it => it.b)
+                    console.log(modelArray.sort((one, two) => one.b.localeCompare(two.b)))
+                    modelArray.sort((one, two) => one.b.localeCompare(two.b));
                 }
             return modelArray;
             }

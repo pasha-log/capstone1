@@ -14,6 +14,7 @@ def get_all_vehicle_brands():
         id = brand['data']['id']
         name = brand['data']['attributes']['name']
         VEHICLE_BRAND_NAMES.append((id, name))
+        VEHICLE_BRAND_NAMES = sorted(VEHICLE_BRAND_NAMES, key=lambda tup: tup[1])
     return VEHICLE_BRAND_NAMES
 
 units = {
