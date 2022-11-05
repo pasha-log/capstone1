@@ -708,7 +708,7 @@ div.shipping {
 	margin: 0 auto;
 	/* margin: 0; */
 	position: absolute;
-	top: 80%;
+	top: 60%;
 	left: 50%;
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
