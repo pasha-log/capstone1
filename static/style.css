@@ -113,6 +113,8 @@ button.signup {
 	position: absolute;
 	top: 150%;
 	left: -5%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 }
 
 button.signup:hover {
@@ -144,6 +146,8 @@ h2.signup {
 	position: relative;
 	top: 75%;
 	left: -35%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 }
 
 img.logo {
