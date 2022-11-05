@@ -143,8 +143,8 @@ h2.signup {
 	align-items: center;
 	position: relative;
 	left: 50%;
-	transform: translateY(-60%);
-	transform: translateX(-50%);
+	transform: translateY(-90%);
+	transform: translateX(-40%);
 }
 
 img.logo {
