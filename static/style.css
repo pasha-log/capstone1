@@ -112,7 +112,7 @@ button.signup {
 	opacity: .7;
 	position: absolute;
 	top: 150%;
-	left: 0%;
+	left: 10%;
 }
 
 button.signup:hover {
@@ -142,8 +142,8 @@ h2.signup {
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	top: 75%;
-	left: 0%;
+	top: 150%;
+	left: 10%;
 }
 
 img.logo {
@@ -166,15 +166,15 @@ div.intro-content {
 p.statement {
 	position: absolute;
 	top: 70px;
-	left: 450px;
-	font-size: 20px;
+	left: 500px;
+	font-size: 25px;
 }
 
 h1.app-name {
 	position: absolute;
 	top: 50px;
-	left: 225px;
-	font-size: 40px;
+	left: 230px;
+	font-size: 45px;
 }
 
 form.signup {
@@ -189,7 +189,7 @@ a.login {
 	right: 100px;
 	color: white;
 	text-decoration: none;
-	font-size: 25px;
+	font-size: 30px;
 }
 
 a.login:hover {
