@@ -1,5 +1,6 @@
 import os
 import re
+import psycopg2
 
 from flask import Flask, render_template, request, flash, redirect, session, g, abort, jsonify
 import requests
@@ -22,6 +23,8 @@ uri = os.environ.get('DATABASE_URL', 'postgresql:///footprint_db')
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 # app.config['SQLALCHEMY_DATABASE_URI'] = (
 #     os.environ.get('DATABASE_URL', 'postgresql:///footprint_db'))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
