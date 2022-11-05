@@ -111,8 +111,8 @@ button.signup {
 	box-shadow: 0 9px #999;
 	opacity: .7;
 	position: absolute;
-	top: 400%;
-	left: 35%;
+	top: 350%;
+	left: 40%;
 }
 
 button.signup:hover {
