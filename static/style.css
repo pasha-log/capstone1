@@ -3,11 +3,6 @@ body {
 	color: white;
 }
 
-div.page-wrapper {
-	display: flex;
-	flex-wrap: wrap;
-}
-
 #base {
 	font-size: 120%;
 }
@@ -170,18 +165,16 @@ div.intro-content {
 	border-radius: 20px;
 }
 
-section.intro {
-
-}
-
-@media (max-width: 900px) {
+@media (min-width: 900px) {
 	.page-wrapper {
-		display: block;
+		display: flex;
+		flex-wrap: wrap;
 	}
 
 	div.intro-content {
 		width: 100%;
-		
+		margin: auto;
+
 	}
 }
 
