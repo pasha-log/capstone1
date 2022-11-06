@@ -157,14 +157,14 @@ img.logo {
 }
 
 div.intro-content {
-	width: 100%;
-	height: 900px;
+	/* width: 100%;
+	height: 900px; */
 	background-image: url('https://live.staticflickr.com/7447/27211256864_023e758b35_b.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-radius: 20px;
-	/* width: 100%;
-  	height: auto; */
+	width: 100%;
+  	height: auto;
 }
 
 /* @media (min-width: 900px) {
