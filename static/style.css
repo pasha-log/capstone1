@@ -170,6 +170,21 @@ div.intro-content {
 	border-radius: 20px;
 }
 
+section.intro {
+
+}
+
+@media (max-width: 900px) {
+	.page-wrapper {
+		display: block;
+	}
+
+	div.intro-content {
+		width: 100%;
+		
+	}
+}
+
 p.statement {
 	position: absolute;
 	top: 70px;
