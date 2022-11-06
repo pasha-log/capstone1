@@ -33,7 +33,7 @@
             <li class="list-group-item">
       
                 <div class="shipping-calc-area">
-                  <a class="username" href="/users/{{ user.id }}">@{{ user.username }}</a>
+                  <p class="username">@{{ user.username }}</p>
                   <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
                   <p>{{ emission.distance_value }} {{ emission.distance_unit }}</p>
                   <p>{{ emission.weight_value }} {{ emission.weight_unit }}</p>
@@ -57,7 +57,7 @@
             <li class="list-group-item">
       
                 <div class="flight-calc-area">
-                  <a class="username" href="/users/{{ user.id }}">@{{ user.username }}</a>
+                  <p class="username">@{{ user.username }}</p>
                   <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
                   <p>{{ emission.distance_value }} {{ emission.distance_unit }}</p>
                   <p>Type: Flight</p>
@@ -79,7 +79,7 @@
             <li class="list-group-item">
       
                 <div class="flight-calc-area">
-                  <a class="username" href="/users/{{ user.id }}">@{{ user.username }}</a>
+                  <p class="username">@{{ user.username }}</p>
                   <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
                   <p>{{ emission.electricity_value }} {{ emission.electricity_unit }}</p>
                   <p>Type: Electricity</p>
