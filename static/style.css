@@ -3,6 +3,11 @@ body {
 	color: white;
 }
 
+div.page-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+}
+
 #base {
 	font-size: 120%;
 }
