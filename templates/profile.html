@@ -11,7 +11,7 @@
             <li class="list-group-item">
       
                 <div class="vehicle-calc-area">
-                  <a class="username" href="/users/{{ user.id }}">@{{ user.username }}</a>
+                  <p class="username">@{{ user.username }}</p>
                   <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
                   <p>{{ emission.distance_value }} {{ emission.distance_unit }}</p>
                   <p>Type: Vehicle</p>

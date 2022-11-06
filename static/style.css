@@ -931,13 +931,9 @@ img.result {
 
 /* Profile */
 
-a.username:link {
-	text-decoration: none;
+p.username {
 	color: white;
-}
-
-a.username:hover {
-	text-decoration: underline;
+	font-weight: bold;
 }
 
 body.profile {
