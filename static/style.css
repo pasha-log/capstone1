@@ -24,7 +24,7 @@ ul.nav {
 	overflow: hidden;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.6);
 	background-color: #4f7cac;
-	width: 90%;
+	width: 100%;
 }
 
 li.nav {
@@ -79,10 +79,10 @@ li.dropdown {
 }
 
 @media screen and (max-width: 600px) {
-	.nav a:not(:first-child) {
+	ul.nav li.nav a:not(:first-child) {
 		display: none;
 	}
-	.nav a.icon {
+	ul.nav li.nav a.icon {
 		float: right;
 		display: block;
 	}
