@@ -704,7 +704,7 @@ div.shipping {
 	text-align: center;
 	/* padding: 20px; */
 	width: 45%;
-	height: 90%;
+	height: 75%;
 	margin: 0 auto;
 	/* margin: 0; */
 	position: absolute;
@@ -714,7 +714,7 @@ div.shipping {
 	transform: translate(-50%, -50%);
 	margin-bottom: 1.5rem;
 	padding: 1.5rem;
-	font-size: 120%;
+	font-size: 130%;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.6);
 }
 
