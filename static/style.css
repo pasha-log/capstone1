@@ -163,14 +163,16 @@ div.intro-content {
 	background-repeat: no-repeat;
 	background-size: contain;
 	border-radius: 20px;
+	width: 100%;
+  	height: auto;
 }
 
-@media (min-width: 900px) {
+/* @media (min-width: 900px) {
 	.page-wrapper {
 		display: flex;
 		flex-wrap: wrap;
 	}
-}
+} */
 
 p.statement {
 	position: absolute;
