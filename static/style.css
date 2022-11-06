@@ -165,16 +165,10 @@ div.intro-content {
 	border-radius: 20px;
 }
 
-@media (min-width: 300px) {
+@media (min-width: 900px) {
 	.page-wrapper {
 		display: flex;
 		flex-wrap: wrap;
-	}
-
-	div.intro-content {
-		width: 100%;
-		margin: auto;
-
 	}
 }
 
