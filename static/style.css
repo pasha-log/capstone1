@@ -161,7 +161,7 @@ div.intro-content {
 	height: 900px; */
 	background-image: url('https://live.staticflickr.com/7447/27211256864_023e758b35_b.jpg');
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: cover;
 	border-radius: 20px;
 	width: 100%;
   	height: auto;
