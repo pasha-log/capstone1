@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<body class="trip">
-  <div class="row justify-content-md-center">
-  <div class="trip">
+<body id="bg-darkblue">
+<section class="text-center text-center--trip">
+  <div class="container container--trip">
     <h2 class="vehicle-title">Vehicle Trip</h2>
     <form method="POST" id="vehicle_trip_form">
-      <!-- <select class="form-control" id="user-vehicles">
-      </select>
-      <a href="/add_my_car">Choose a different car</a> -->
+
       {{ form.hidden_tag() }}
 
       {% for field in form if field.widget.input_type != 'hidden' %}
@@ -26,10 +24,10 @@
         <option value="g">g</option>
         <option value="mt(metric tonnes)">mt(metric tonnes)</option>
       </select>
-
+      <br>
       <button class="emit">Emit Carbon Dioxide</button>
     </form>
   </div>
-</div>
+</section>
 </body>
 {% endblock %}

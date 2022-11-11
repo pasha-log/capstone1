@@ -1,41 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<body class="shipping">
-  <div class="row justify-content-md-center">
-  <div class="shipping">
-    <h2 class="shipping-title">Shipping</h2>
-    <form method="POST" id="shipping_form">
+<body id="bg-red">
+  <section class="text-center">
+  <div class="stack stack--shipping">
+    <div class="container container--shipping">
+        <h2 class="shipping-title">Shipping</h2>
+        <form method="POST" id="shipping_form">
     
-      {{ form.hidden_tag() }}
-
-      {% for field in form if field.widget.input_type != 'hidden' %}
-        {% for error in field.errors %}
-          <span class="text-danger">{{ error }}</span>
-        {% endfor %}
-        {{ field(placeholder=field.label.text, class="form-control") }}
-      {% endfor %}
-
-      <br>
-      <label class="methods" for="methods"><b>Transport Type</b></label>
-      <select name="transport_method" id="methods">
-        <option value="ship">ship</option>
-        <option value="train">train</option>
-        <option value="truck">truck</option>
-        <option value="plane">plane</option>
-      </select>
-      <br>
-      <label class="units" for="units"><b>CO<sub>2</sub> unit</b></label>
-      <select name="emission_unit" id="units">
-        <option value="lbs">lbs</option>
-        <option value="kg">kg</option>
-        <option value="g">g</option>
-        <option value="mt(metric tonnes)">mt(metric tonnes)</option>
-      </select>
-
-      <button class="emit">Emit Carbon Dioxide</button>
-    </form>
+          {{ form.hidden_tag() }}
+          {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for error in field.errors %}
+              <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+            {{ field(placeholder=field.label.text, class="form-control") }}
+          {% endfor %}
+          <br>
+          <label class="methods" for="methods"><b>Transport Type</b></label>
+          <select name="transport_method" id="methods">
+            <option value="ship">ship</option>
+            <option value="train">train</option>
+            <option value="truck">truck</option>
+            <option value="plane">plane</option>
+          </select>
+          <br>
+          <label class="units" for="units"><b>CO<sub>2</sub> unit</b></label>
+          <select name="emission_unit" id="units">
+            <option value="lbs">lbs</option>
+            <option value="kg">kg</option>
+            <option value="g">g</option>
+            <option value="mt(metric tonnes)">mt(metric tonnes)</option>
+          </select>
+          <button class="emit--shipping">Emit Carbon Dioxide</button>
+        </form>
+    </div>
   </div>
-</div>
+</section>
 </body>
 {% endblock %}

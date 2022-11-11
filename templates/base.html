@@ -8,39 +8,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/jquery"></script>
     <script src="/static/app.js"></script>
+    <script src="/static/nav.js" defer></script>
+    <script src="/static/profile.js" defer></script>
     <title>Carbon Print</title>
 </head>
-<body>
-    <div class="page-wrapper">
-    <nav class="profile-navbar">
-        <ul class="nav">
-            <li class="nav-child"><a href="/choices">
-                <img width="25px" height="14px" src="https://sustainableleatherfoundation.com/wp-content/uploads/2021/04/carbon-footprint-icon-large.png" alt="logo">
-                Carbon Print</a></li>
-            <li class="nav-child">
-                <a href="/user/{{ g.user.id }}">Profile</a>
-            </li>
-            <li class="dropdown">
-              <a href="javascript:void(0)" class="dropbtn">Calculate</a>
-              <div class="dropdown-content">
-                <a href="/add_my_car">Vehicle</a>
-                <a href="/shipping">Shipping</a>
-                <a href="/flight">Flight</a>
-                <a href="/electricity">Electricity</a>
-              </div>
-            </li>
-            <li class="nav-child">
-                <a class="chart" href="/user/chart">Chart</a>
-            </li>
-            <li class="nav-child" style="float:right"><a class="active" href="/logout">Logout</a></li>
-            <li class="nav-child">
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <div class="container">
+<body class="main">
+    <header class="primary-header flex">
+
+        <button class="mobile-nav-toggle" 
+        aria-controls="primary-navigation" aria-expanded="false">
+        <span class="sr-only"></span>
+        </button>
+
+        <nav class="bg-navyblue">
+            <ul id="primary-navigation" data-visible="false" class="primary-navigation flex">
+                <li class="nav-child nav-child--logo">
+                    <a href="/choices">
+                        <!-- <div class="img">
+                            <img class="logo" width="40px" height="31px" src="https://sustainableleatherfoundation.com/wp-content/uploads/2021/04/carbon-footprint-icon-large.png" alt="logo">
+                        </div>
+                        <span aria-hidden="true">
+                    </span>
+                    <div class="text"><p>Carbon Print</p></div> -->
+                    <div class="img-container">
+                        <span aria-hidden="true">
+                            <div class="image">
+                                <img class="logo" width="50px" height="41px" src="https://sustainableleatherfoundation.com/wp-content/uploads/2021/04/carbon-footprint-icon-large.png" alt="logo">
+                            </div>
+                        </span>
+                        <div class="text">
+                            <p>Carbon</p>
+                        </div>
+                      </div>
+                    </a>
+                </li>
+                <li class="nav-child">
+                    <a href="/user/{{ g.user.id }}">
+                        <span aria-hidden="true">📋</span>Profile
+                    </a>
+                </li>
+                <li class="dropdown">
+                  <a href="javascript:void(0)" class="dropbtn">
+                    <span aria-hidden="true">🧮</span>Calculate
+                  </a>
+                      <div class="stack stack--drop">
+                          <div class="dropdown-content">
+                            <a href="/add_my_car">Vehicle</a>
+                            <a href="/shipping">Shipping</a>
+                            <a href="/flight">Flight</a>
+                            <a href="/electricity">Electricity</a>
+                          </div>
+                      </div>
+                </li>
+                <li class="nav-child">
+                    <a class="chart" href="/user/chart">
+                        <span aria-hidden="true">📈</span>Chart
+                    </a>
+                </li>
+                <li class="nav-child">
+                    <a class="active" href="/logout">
+                        <span aria-hidden="true">✌️</span>Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container container--alert">
         {% for category, message in get_flashed_messages(with_categories=True) %}
         <div id="base" class="alert alert-{{ category }}"><b>{{ message }}</b></div>
         {% endfor %}
@@ -48,17 +81,6 @@
         {% block content %}
         {% endblock %}
     </div>
-    </div>
-    <script>
-        function myFunction() {
-          var x = document.getElementById("nav");
-          if (x.className === "nav") {
-            x.className += " responsive";
-          } else {
-            x.className = "nav";
-          }
-        }
-    </script>
 </body>
 
 </html>

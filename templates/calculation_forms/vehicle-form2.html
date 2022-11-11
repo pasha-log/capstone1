@@ -1,35 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<body class="vehicle-form">
-<div class="form-row">
-    <div class="form-group col-md-4" id="brand">
-        <h1><b>Add a vehicle</b></h1>
+<body id="bg-beige">
+<section class="form-row">
+    <div class="container container--brand">
+        <div class="" id="brand">
+            <h1><b>Add a vehicle</b></h1>
+            <br>
+            <label class="Menu" for="Menu1">Brands</label>
+            <select class="form-control1" name="brands" id="Menu1">
+                <option value="">--Please choose a brand--</option>
+                {% for brand in BRAND_LIST %}
+                <option id="{{ brand[0] }}" value="{{ brand[1] }}">{{ brand[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="loading"></div>
         <br>
-        <label class="Menu" for="Menu1">Brands</label>
-        <select class="form-control1" name="brands" id="Menu1">
-            <option value="">--Please choose a brand--</option>
-            {% for brand in BRAND_LIST %}
-            <option id="{{ brand[0] }}" value="{{ brand[1] }}">{{ brand[1] }}</option>
-            {% endfor %}
-        </select>
+        <br>
+        <div class="form-group" id="hiddenDiv">
+            <div class="models">
+                <label class="Menu2" for="Menu2">Models</label>
+                <select class="form-control2" name="models" id="Menu2">
+                    <option value="">--Please choose a model--</option>
+                </select>
+            </div>
+                <div class="brand-buttons">
+                    <div>
+                        <form method="GET" id="select-brand-model">
+                            <button class="model">Select</button>
+                        </form>
+                    </div>
+                    <div>
+                        <form method="GET" id="brand-name">
+                            <button class="reset">Reset</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
     </div>
-    <div class="loading"></div> 
-    <br>
-    <br>
-    <div class="form-group col-md-4" id="hiddenDiv">
-        <label class="Menu2" for="Menu2">Models</label>
-        <select class="form-control2" name="models" id="Menu2">
-            <option value="">--Please choose a model--</option>
-        </select>
-        <form method="GET" id="select-brand-model">
-            <button class="model">Select</button>
-        </form>
-        <form method="GET" id="brand-name">
-            <button class="reset">Reset</button>
-        </form>
-    </div>
-</div>
+</section>
 </body>
 <script src="https://unpkg.com/jquery"></script>
 <script src="/static/app.js"></script>

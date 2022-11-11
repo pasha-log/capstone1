@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<body class="flight">
-  <div class="flight">
+<body id="flight">
+  <section class="text-center text-center--flight">
+  <div class="container container--flight">
     <h2 class="flight-title">Flight</h2>
     <form method="POST" id="flight_form">
     
@@ -24,12 +25,9 @@
         <option value="mt(metric tonnes)">mt(metric tonnes)</option>
       </select>
 
-      <button class="emit">Emit Carbon Dioxide</button>
+      <button class="emit emit--flight">Emit Carbon Dioxide</button>
     </form>
   </div>
-<img src="/static/images/cloud.jpg" class="cloud5">
-<img src="/static/images/cloud.jpg" class="cloud6">
-<img src="/static/images/cloud.jpg" class="cloud7">
-<img src="/static/images/cloud.jpg" class="cloud8">
+</section>
 </body>
 {% endblock %}

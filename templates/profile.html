@@ -1,40 +1,40 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<body class="profile">
-  <div class="row">
-    <div class="column"  id="vehicle-calculations">
-        <ul>
-          <h3>Vehicle emissions</h3>
-            {% if vehicle_calculations|length > 0 %}
-            {% for emission in vehicle_calculations %}
+<body id="bg-teal">
+  <section>
+  <div class="split--profile">
+    <div id="vehicle-calculations" class="calculation">
+      <button class="collapsible">🚗 Vehicle Emissions</button>
+      <ul class="content">
+        {% if vehicle_calculations|length > 0 %}
+        {% for emission in vehicle_calculations %}
             <li class="list-group-item">
       
                 <div class="vehicle-calc-area">
                   <p class="username">@{{ user.username }}</p>
-                  <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
-                  <p>{{ emission.distance_value }} {{ emission.distance_unit }}</p>
+                  <span class="text-muted">📅{{ emission.timestamp.strftime('%d %B %Y') }}</span>
+                  <p>{{ emission.carbon }} {{ emission.emission_unit }}</p>
                   <p>Type: Vehicle</p>
                 </div>
                 
               </li>
             {% endfor %}
             {% else %}
-            <p>You have no vehicle emissions yet</p>
+            <p>No emissions yet. Good job!🌼</p>
             {% endif %}
         </ul>
     </div>
-    <br>
-    <div class="column" id="shipping-calculations">
-        <ul>
-          <h3>Shipping emissions</h3>
+    <div id="shipping-calculations" class="calculation">
+      <button class="collapsible">🚚 Shipping Emissions</button>
+        <ul class="content">
             {% if shipping_calculations|length > 0 %}
             {% for emission in shipping_calculations %}
             <li class="list-group-item">
       
                 <div class="shipping-calc-area">
                   <p class="username">@{{ user.username }}</p>
-                  <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
+                  <span class="text-muted">📅{{ emission.timestamp.strftime('%d %B %Y') }}</span>
                   <p>{{ emission.distance_value }} {{ emission.distance_unit }}</p>
                   <p>{{ emission.weight_value }} {{ emission.weight_unit }}</p>
                   <p>Type: Shipping</p>
@@ -44,21 +44,21 @@
               </li>
             {% endfor %}
             {% else %}
-            <p>You have no shipping emissions yet</p>
+            <p>No emissions yet. Good job!🌼</p>
+
             {% endif %}
         </ul>
     </div>
-    <br>
-    <div class="column" id="flight-calculations">
-        <ul>
-          <h3>Flight emissions</h3>
+    <div id="flight-calculations" class="calculation">
+      <button class="collapsible">🛫 Flight Emissions</button>
+      <ul class="content">
             {% if flight_calculations|length > 0 %}
             {% for emission in flight_calculations %}
             <li class="list-group-item">
       
                 <div class="flight-calc-area">
                   <p class="username">@{{ user.username }}</p>
-                  <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
+                  <span class="text-muted">📅{{ emission.timestamp.strftime('%d %B %Y') }}</span>
                   <p>{{ emission.distance_value }} {{ emission.distance_unit }}</p>
                   <p>Type: Flight</p>
                 </div>
@@ -66,21 +66,20 @@
               </li>
             {% endfor %}
             {% else %}
-            <p>You have no flight emissions yet</p>
+            <p>No emissions yet. Good job!🌼</p>
             {% endif %}
         </ul>
     </div>
-    <br>
-    <div class="column" id="electricity-calculations">
-        <ul>
-          <h3>Electricity emissions</h3>
+    <div id="electricity-calculations" class="calculation">
+      <button class="collapsible">⚡ Electricity Emissions</button>
+      <ul class="content">
             {% if electricity_calculations|length > 0 %}
             {% for emission in electricity_calculations %}
             <li class="list-group-item">
       
                 <div class="flight-calc-area">
                   <p class="username">@{{ user.username }}</p>
-                  <span class="text-muted">{{ emission.timestamp.strftime('%d %B %Y') }}</span>
+                  <span class="text-muted">📅{{ emission.timestamp.strftime('%d %B %Y') }}</span>
                   <p>{{ emission.electricity_value }} {{ emission.electricity_unit }}</p>
                   <p>Type: Electricity</p>
                   <p>Country: {{ emission.country }}</p>
@@ -89,10 +88,11 @@
               </li>
             {% endfor %}
             {% else %}
-            <p>You have no vehicle emissions yet</p>
+            <p>No emissions yet. Good job!🌼</p>
             {% endif %}
         </ul>
     </div>
   </div>
+  </section>
   </body>
 {% endblock %}

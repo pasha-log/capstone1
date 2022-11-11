@@ -1,10 +1,12 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<body class="chart">
+<body id="bg-green">
+    <section class="text-center text-center--chart">
     <div class="chart" style="height: 550px; width: 750px">
         <canvas id="lineChart"></canvas>
     </div>
+</section>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/static/graph.js"></script>

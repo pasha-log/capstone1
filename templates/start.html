@@ -3,32 +3,41 @@
     <link rel="stylesheet" href="/static/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
 </head>
-<body class="start-page">
-<div class="page-wrapper">
-<section class="intro">
-    <div class="intro-content" width="1351" height="900">
-        <img src="https://sustainableleatherfoundation.com/wp-content/uploads/2021/04/carbon-footprint-icon-large.png" class="logo" alt="logo">
-        <h1 class="app-name">Carbon<br>Print</h1>
-        <p class="statement">Calculate carbon emissions<br> from your
-        road trips, shipments, <br>flights, and electricity.
-        </p>
-        <h1 class="greeting">
-            <span class = 'letter'>H</span>
-            <span class = 'letter'>E</span>
-            <span class = 'letter'>L</span>
-            <span class = 'letter'>L</span>
-            <span class = 'letter'>O</span>
-        </h1>
-        <form method="GET" action="/signup" class="signup">
-            <h2 class="signup">{Create an account today}</h2>
-            <br>
-            <button class="signup">Register</button>
-        </form>
-        
-        <b><a class="login" href="/login">Login</a></b>
-
-    </div>
-</section>
+<body class="bg-black">
+        <header class="text-center text-center--title">
+        <div class="split">
+            <div class="logo">
+                <img src="https://sustainableleatherfoundation.com/wp-content/uploads/2021/04/carbon-footprint-icon-large.png" class="logo" alt="logo">
+            </div>
+            <div class="statement">
+                <h1 class="title">Carbon<br>Print</h1>
+            </div>
+            <div class="statement">
+                <p>Calculate carbon emissions from your <br> road trips, shipments, flights, and electricity.
+                </p>
+            </div>
+            <div>
+                <b><a class="login" href="/login">Login</a></b>
+            </div>
+        </div>
+        </header>
+        <section class="intro">
+        <div class="container">
+            <h1 class="text-center">
+                <span class = 'letter'>H</span>
+                <span class = 'letter'>E</span>
+                <span class = 'letter'>L</span>
+                <span class = 'letter'>L</span>
+                <span class = 'letter'>O</span>
+            </h1>
+            <form method="GET" action="/signup" class="text-center">
+                <h2 class="text-center">{Create an account today}</h2>
+                <br>
+                <button class="sign-up">Register</button>
+            </form>
+        </div>
+        </section>
+<section>
 <div class="container">
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div id="start" class="alert alert-{{ category }}">{{ message }}</div>
@@ -37,7 +46,7 @@
     {% block content %}
     {% endblock %}
 </div>
-</div>
+</section>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/static/randomColors.js"></script> 

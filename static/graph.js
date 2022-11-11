@@ -1,5 +1,5 @@
 const CHART = document.getElementById('lineChart');
-const BASE_URL = 'https://carbonprint.herokuapp.com';
+const BASE_URL = 'http://127.0.0.1:5000';
 
 async function getData() {
 	fetch(`${BASE_URL}/user/data`, { method: 'GET', method: 'POST' })

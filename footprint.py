@@ -14,7 +14,9 @@ def get_all_vehicle_brands():
         id = brand['data']['id']
         name = brand['data']['attributes']['name']
         VEHICLE_BRAND_NAMES.append((id, name))
+        # https://stackoverflow.com/questions/8966538/syntax-behind-sortedkey-lambda
         VEHICLE_BRAND_NAMES = sorted(VEHICLE_BRAND_NAMES, key=lambda tup: tup[1])
+        # https://stackoverflow.com/questions/8966538/syntax-behind-sortedkey-lambda
     return VEHICLE_BRAND_NAMES
 
 units = {
@@ -78,12 +80,12 @@ def get_shipping_estimate(weight_unit, weight_value, distance_unit, distance_val
     }
 
     res = requests.post(url, headers=headers, json=data)
-    result = res.json() 
+    data = res.json() 
 
     for key in units.keys(): 
         if key == emission_unit:
             carbon_unit = units[key] 
-            return result['data']['attributes'][f'{carbon_unit}']
+            return data['data']['attributes'][f'{carbon_unit}']
 
 def get_flight_estimate(distance_unit, distance_value, emission_unit):
     avg_lbs_per_mile = 53

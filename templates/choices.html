@@ -1,29 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<body class="choices">
-<section class="Choices">
-    <h2 class="choices-title"><b>What do you want to calculate today?</b></h2>
-    <form method="GET" action="/add_my_car" class="inner">
-        <p class="icon">🚗</p>
-        <button class="choice"><b>Vehicle</b></button>
-    </form>
-    <form method="GET" action="/shipping" class="inner">
-        <p class="icon">🚚</p>
-        <button class="choice"><b>Shipping</b></button>
-    </form>
-    <form method="GET" action="/flight" class="inner">
-        <p class="icon">🛫</p>
-        <button class="choice"><b>Flight</b></button>
-    </form>
-    <form method="GET" action="/electricity" class="inner">
-        <p class="icon">⚡</p>
-        <button class="choice"><b>Electricity</b></button>
-    </form>
+<body id="bg-teal">
+   
+    <section class="Choices">
+        <div class="container container--choices">
+            <h2 class="text-center text-center--question"><b>What do you want to calculate today?</b></h2>
+        </div>
+        <div class="split split--choices">
+        <div>
+            <form method="GET" action="/add_my_car" class="text-center">
+                <p class="icon">🚗</p>
+                <button class="choice"><b>Vehicle</b></button>
+            </form>
+        </div>
+        <div>
+            <form method="GET" action="/shipping" class="text-center">
+                <p class="icon">🚚</p>
+                <button class="choice"><b>Shipping</b></button>
+            </form>
+        </div>
+        <div>
+            <form method="GET" action="/flight" class="text-center">
+                <p class="icon">🛫</p>
+                <button class="choice"><b>Flight</b></button>
+            </form>
+        </div>
+        <div>
+            <form method="GET" action="/electricity" class="text-center">
+                <p class="icon">⚡</p>
+                <button class="choice"><b>Electricity</b></button>
+            </form>
+        </div>
+    </div>
 </section>
-<img src="static/images/cloud.jpg" class="cloud1">
-<img src="static/images/cloud.jpg" class="cloud2">
-<img src="static/images/cloud.jpg" class="cloud3">
-<img src="static/images/cloud.jpg" class="cloud4">
+
+
 </body>
 {% endblock %}

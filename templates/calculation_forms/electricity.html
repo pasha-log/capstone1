@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<body class="electricity">
-  <div class="electricity">
+<body id="bg-green">
+  <section class="text-center text-center--electricity">
+  <div class="container container--electricity">
     <h2 class="electro-title">Electricity</h2>
     <form method="POST" id="electricity_form">
     
@@ -24,8 +25,9 @@
         <option value="mt(metric tonnes)">mt(metric tonnes)</option>
       </select>
 
-      <button class="emit">Emit Carbon Dioxide</button>
+      <button class="emit emit--electro">Emit Carbon Dioxide</button>
     </form>
   </div>
+</section>
 </body>
 {% endblock %}
