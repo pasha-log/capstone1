@@ -631,12 +631,12 @@ button.emit {
 	border: none;
 	border-radius: .938rem;
 	box-shadow: 0 9px #999;
-	margin: 0;
-	position: absolute;
+	margin: 0 auto;
+	/* position: absolute;
 	top: 84%;
 	left: 50%;
 
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%); */
 	width: 200px;
 	height: 100px;
 	font-size: 90%;
