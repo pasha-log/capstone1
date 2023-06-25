@@ -9,10 +9,10 @@ https://user-images.githubusercontent.com/65935072/201440457-98b95105-6c1d-4248-
 - 🌐[Carbon Print](https://carbonprint.herokuapp.com/)
 
 ## API Integration: 
-This will be my first capstone project using a RESTful API called Carbon Interface: 
+This is my first capstone project using a RESTful API called Carbon Interface: 
 - 👣[Carbon Interface](https://docs.carboninterface.com/)
 
-This simple application will utilize this API and provide a friendly UI to calculate a client's carbon footprints from activities such as 
+This application utilizes this API and provide a friendly UI to calculate a client's carbon footprints from activities such as 
 * Vehicles
 * Shipping  
 * Flights
